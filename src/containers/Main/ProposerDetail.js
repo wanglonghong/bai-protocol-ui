@@ -74,9 +74,9 @@ function ProposerDetail({ match, getVoterDetail, getVoterHistory }) {
               .div(new BigNumber(10).pow(18))
               .dp(4, 1)
               .toString(10),
-            delegates: res.data.delegates.toLowerCase(),
-            delegateCount: res.data.delegateCount || 0,
-            votes: new BigNumber(res.data.votes)
+            delegates: res.data.id.toLowerCase(),
+            delegateCount: res.data.tokenHoldersRepresentedAmount || 0,
+            votes: new BigNumber(res.data.delegatedVotesRaw)
               .div(new BigNumber(10).pow(18))
               .dp(4, 1)
               .toString(10)

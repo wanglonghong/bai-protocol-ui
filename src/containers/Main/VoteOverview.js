@@ -308,8 +308,8 @@ function VoteOverview({ settings, getVoters, getProposalById, match }) {
                   list={
                     agreeVotes.result &&
                     agreeVotes.result.map(v => ({
-                      label: v.address,
-                      value: v.votes
+                      label: v.voter,
+                      value: v.votesRaw
                     }))
                   }
                   onViewAll={() => loadMore('for')}
@@ -343,8 +343,8 @@ function VoteOverview({ settings, getVoters, getProposalById, match }) {
                   list={
                     againstVotes.result &&
                     againstVotes.result.map(v => ({
-                      label: v.address,
-                      value: v.votes
+                      label: v.voter,
+                      value: v.votesRaw
                     }))
                   }
                   onViewAll={() => loadMore('against')}

@@ -66,7 +66,6 @@ function MarketSummary({ marketInfo, currentAsset, settings }) {
         <p className="value">
           {`${format(
             new BigNumber(marketInfo.cash || 0)
-              .div(new BigNumber(10).pow(settings.decimals[currentAsset].token))
               .dp(8, 1)
               .toString(10)
           )} ${marketInfo.underlyingSymbol || ''}`}
@@ -158,19 +157,7 @@ function MarketSummary({ marketInfo, currentAsset, settings }) {
           {`1 ${marketInfo.underlyingSymbol || ''} = ${Number(
             new BigNumber(1)
               .div(
-                new BigNumber(marketInfo.exchangeRate).div(
-                  new BigNumber(10).pow(
-                    18 +
-                      +parseInt(
-                        settings.decimals[currentAsset || 'sxp'].token,
-                        10
-                      ) -
-                      +parseInt(
-                        settings.decimals[currentAsset || 'sxp'].vtoken,
-                        10
-                      )
-                  )
-                )
+                new BigNumber(marketInfo.exchangeRate)
               )
               .toString(10)
           ).toFixed(6)} ${marketInfo.symbol || ''}`}

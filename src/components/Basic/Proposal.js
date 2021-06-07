@@ -286,7 +286,7 @@ Proposal.propTypes = {
     id: PropTypes.number,
     description: PropTypes.string,
     state: PropTypes.string,
-    forVotes: PropTypes.string,
+    forVotes: PropTypes.number,
     againstVotes: PropTypes.string,
     voted: PropTypes.bool,
     createdAt: PropTypes.string

@@ -21,12 +21,18 @@ export function* asyncGetMarketHistoryRequest({ payload, resolve, reject }) {
 
   try {
     const response = yield call(restService, {
-      api: `/market_history/graph?asset=${asset}&type=${type}`,
+      api: `${process.env.REACT_APP_DEVELOPMENT_API}/market/graph?asset=${asset}&type=${type}`,
       method: 'GET',
-      params: {}
+      third_party: true,
+      params: {},
     });
+    // const response = yield call(restService, {
+    //   api: `/market_history/graph?asset=${asset}&type=${type}`,
+    //   method: 'GET',
+    //   params: {}
+    // });
     if (response.status === 200) {
-      resolve(response.data);
+      resolve(response);
     }
   } catch (e) {
     reject(e);
@@ -36,12 +42,18 @@ export function* asyncGetMarketHistoryRequest({ payload, resolve, reject }) {
 export function* asyncGetGovernanceVenusRequest({ payload, resolve, reject }) {
   try {
     const response = yield call(restService, {
-      api: `/governance/venus`,
+      api: `${process.env.REACT_APP_DEVELOPMENT_API}/bidao`,
       method: 'GET',
-      params: {}
+      third_party: true,
+      params: {},
     });
+    // const response = yield call(restService, {
+    //   api: `/governance/venus`,
+    //   method: 'GET',
+    //   params: {}
+    // });
     if (response.status === 200) {
-      resolve(response.data);
+      resolve(response);
     }
   } catch (e) {
     reject(e);
@@ -52,12 +64,14 @@ export function* asyncGetProposalsRequest({ payload, resolve, reject }) {
   const { limit, offset } = payload;
   try {
     const response = yield call(restService, {
-      api: `/proposals?limit=${limit || 5}&offset=${offset || 0}`,
+      api: `${process.env.REACT_APP_DEVELOPMENT_API}/proposals?limit=${limit || 5}&offset=${offset || 0}`,
       method: 'GET',
-      params: {}
+      third_party: true,
+      params: {},
     });
+  
     if (response.status === 200) {
-      resolve(response.data);
+      resolve(response);
     } else {
       reject(response);
     }
@@ -94,12 +108,18 @@ export function* asyncGetProposalByIdRequest({ payload, resolve, reject }) {
   const { id } = payload;
   try {
     const response = yield call(restService, {
-      api: `/proposals/${id}`,
+      api: `${process.env.REACT_APP_DEVELOPMENT_API}/proposals/${id}`,
       method: 'GET',
-      params: {}
+      third_party: true,
+      params: {},
     });
+    // const response = yield call(restService, {
+    //   api: `/proposals/${id}`,
+    //   method: 'GET',
+    //   params: {}
+    // });
     if (response.status === 200) {
-      resolve(response.data);
+      resolve(response);
     } else {
       reject(response);
     }
@@ -111,12 +131,18 @@ export function* asyncGetVotersRequest({ payload, resolve, reject }) {
   const { limit, filter, id } = payload;
   try {
     const response = yield call(restService, {
-      api: `/voters/${id}?limit=${limit || 3}&filter=${filter}`,
+      api: `${process.env.REACT_APP_DEVELOPMENT_API}/voters/proposal/${id}?limit=${limit || 3}&filter=${filter}`,
       method: 'GET',
-      params: {}
+      third_party: true,
+      params: {},
     });
+    // const response = yield call(restService, {
+    //   api: `/voters/${id}?limit=${limit || 3}&filter=${filter}`,
+    //   method: 'GET',
+    //   params: {}
+    // });
     if (response.status === 200) {
-      resolve(response.data);
+      resolve(response);
     } else {
       reject(response);
     }
@@ -128,12 +154,18 @@ export function* asyncGetVoterDetailRequest({ payload, resolve, reject }) {
   const { address } = payload;
   try {
     const response = yield call(restService, {
-      api: `/voters/accounts/${address}`,
+      api: `${process.env.REACT_APP_DEVELOPMENT_API}/voters/account/${address}`,
       method: 'GET',
-      params: {}
+      third_party: true,
+      params: {},
     });
+    // const response = yield call(restService, {
+    //   api: `/voters/accounts/${address}`,
+    //   method: 'GET',
+    //   params: {}
+    // });
     if (response.status === 200) {
-      resolve(response.data);
+      resolve(response);
     } else {
       reject(response);
     }
@@ -144,14 +176,20 @@ export function* asyncGetVoterDetailRequest({ payload, resolve, reject }) {
 export function* asyncGetVoterHistoryRequest({ payload, resolve, reject }) {
   const { offset, limit, address } = payload;
   try {
-    const response = yield call(restService, {
-      api: `/voters/history/${address}?offset=${offset || 0}&limit=${limit ||
-        5}`,
+     const response = yield call(restService, {
+      api: `${process.env.REACT_APP_DEVELOPMENT_API}/voters/history/${address}?offset=${offset || 0}&limit=${limit || 5 }`,
       method: 'GET',
-      params: {}
+      third_party: true,
+      params: {},
     });
+    // const response = yield call(restService, {
+    //   api: `/voters/history/${address}?offset=${offset || 0}&limit=${limit ||
+    //     5}`,
+    //   method: 'GET',
+    //   params: {}
+    // });
     if (response.status === 200) {
-      resolve(response.data);
+      resolve(response);
     } else {
       reject(response);
     }
@@ -164,12 +202,18 @@ export function* asyncGetVoterAccountsRequest({ payload, resolve, reject }) {
 
   try {
     const response = yield call(restService, {
-      api: `/voters/accounts?limit=${limit || 100}&offset=${offset || 0}`,
+      api: `${process.env.REACT_APP_DEVELOPMENT_API}/voters/accounts?limit=${limit || 100}&offset=${offset || 0}`,
       method: 'GET',
-      params: {}
+      third_party: true,
+      params: {},
     });
+    // const response = yield call(restService, {
+    //   api: `/voters/accounts?limit=${limit || 100}&offset=${offset || 0}`,
+    //   method: 'GET',
+    //   params: {}
+    // });
     if (response.status === 200) {
-      resolve(response.data);
+      resolve(response);
     }
   } catch (e) {
     reject(e);

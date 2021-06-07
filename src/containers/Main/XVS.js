@@ -228,13 +228,13 @@ function XVS({ settings }) {
     const remainedAmount = await methods.call(tokenContract.methods.balanceOf, [
       constants.CONTRACT_COMPTROLLER_ADDRESS
     ]);
-    setDailyDistribution(
-      new BigNumber(settings.dailyVenus)
-        .div(new BigNumber(10).pow(18))
-        .plus(venusVAIVaultRate)
-        .dp(2, 1)
-        .toString(10)
-    );
+    // setDailyDistribution(
+    //   new BigNumber(settings.dailyVenus)
+    //     .div(new BigNumber(10).pow(18))
+    //     .plus(venusVAIVaultRate)
+    //     .dp(2, 1)
+    //     .toString(10)
+    // );
     setTotalDistributed(sum.toString(10));
     setRemainAmount(
       new BigNumber(remainedAmount)
@@ -266,17 +266,17 @@ function XVS({ settings }) {
               .toString(10))
       });
     }
-    tempMarkets.push({
-      underlyingSymbol: 'VAI',
-      perDay: +venusVAIVaultRate.dp(2, 1).toString(10),
-      supplyAPY: settings.vaiAPY || 0,
-      borrowAPY: 0
-    });
+    // tempMarkets.push({
+    //   underlyingSymbol: 'VAI',
+    //   perDay: +venusVAIVaultRate.dp(2, 1).toString(10),
+    //   supplyAPY: settings.vaiAPY || 0,
+    //   borrowAPY: 0
+    // });
     setMarkets(tempMarkets);
   };
 
   useEffect(() => {
-    if (settings.markets && settings.dailyVenus) {
+    if (settings.markets /* && settings.dailyVenus */) {
       getXVSInfo();
     }
   }, [settings.markets]);
@@ -318,16 +318,13 @@ function XVS({ settings }) {
                     <Icon className="pointer copy-btn" type="copy" />
                   </CopyToClipboard>
                 </div>
-                <div className="flex flex-column distribution-wrapper">
+                {/* <div className="flex flex-column distribution-wrapper">
                   <div className="flex align-center just-around info-wrapper">
                     <div className="info-item">
                       <p className="title">Daily Distribution</p>
                       <p className="value">{format(dailyDistribution)}</p>
                     </div>
-                    {/* <div className="info-item">
-                      <p className="title">Total Distributed</p>
-                      <p className="value">{format(totalDistributed)}</p>
-                    </div> */}
+                    
                     <div className="info-item">
                       <p className="title">Remaining</p>
                       <p className="value">{format(remainAmount)}</p>
@@ -343,15 +340,15 @@ function XVS({ settings }) {
                     strokeWidth={7}
                     showInfo={false}
                   />
-                </div>
+                </div> */}
               </XVSInfoWrapper>
               <TableWrapper>
                 <p className="header-title">Market Distribution</p>
                 <Row className="table_header">
-                  <Col xs={{ span: 24 }} lg={{ span: 6 }} className="market">
+                  <Col xs={{ span: 24 }} lg={{ span: 8 }} className="market">
                     Market
                   </Col>
-                  <Col
+                  {/* <Col
                     xs={{ span: 8 }}
                     lg={{ span: 6 }}
                     className="per-day right"
@@ -366,10 +363,10 @@ function XVS({ settings }) {
                         />
                       )}
                     </span>
-                  </Col>
+                  </Col> */}
                   <Col
                     xs={{ span: 8 }}
-                    lg={{ span: 6 }}
+                    lg={{ span: 8 }}
                     className="supply-apy right"
                   >
                     <span onClick={() => handleSort('supplyAPY')}>
@@ -387,7 +384,7 @@ function XVS({ settings }) {
                   </Col>
                   <Col
                     xs={{ span: 8 }}
-                    lg={{ span: 6 }}
+                    lg={{ span: 8 }}
                     className="borrow-apy right"
                   >
                     <span onClick={() => handleSort('borrowAPY')}>
@@ -448,7 +445,7 @@ function XVS({ settings }) {
                         <Row className="table_item pointer" key={index}>
                           <Col
                             xs={{ span: 24 }}
-                            lg={{ span: 6 }}
+                            lg={{ span: 8 }}
                             className="flex align-center market"
                           >
                             {item.underlyingSymbol !== 'VAI' ? (
@@ -470,17 +467,17 @@ function XVS({ settings }) {
                             )}
                             <p>{item.underlyingSymbol}</p>
                           </Col>
-                          <Col
+                          {/* <Col
                             xs={{ span: 24 }}
                             lg={{ span: 6 }}
                             className="per-day right"
                           >
                             <p className="mobile-label">Per day</p>
                             <p>{item.perDay}</p>
-                          </Col>
+                          </Col> */}
                           <Col
                             xs={{ span: 24 }}
-                            lg={{ span: 6 }}
+                            lg={{ span: 8 }}
                             className="supply-apy right"
                           >
                             <p className="mobile-label">Supply APY</p>
@@ -488,7 +485,7 @@ function XVS({ settings }) {
                           </Col>
                           <Col
                             xs={{ span: 24 }}
-                            lg={{ span: 6 }}
+                            lg={{ span: 8 }}
                             className="borrow-apy right"
                           >
                             <p className="mobile-label">Borrow APY</p>

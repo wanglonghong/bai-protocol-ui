@@ -141,7 +141,7 @@ function VoterLeaderboard({ history, getVoterAccounts }) {
                 <Row
                   className="table_item pointer"
                   key={index}
-                  onClick={() => history.push(`/vote/address/${item.address}`)}
+                  onClick={() => history.push(`/vote/address/${item._id}`)}
                 >
                   <Col
                     xs={{ span: 24 }}
@@ -149,7 +149,7 @@ function VoterLeaderboard({ history, getVoterAccounts }) {
                     className="flex align-center rank"
                   >
                     <div className="rank-number">{index + 1}</div>
-                    <p>{item.address}</p>
+                    <p>{item._id}</p>
                   </Col>
                   <Col
                     xs={{ span: 24 }}
@@ -159,7 +159,7 @@ function VoterLeaderboard({ history, getVoterAccounts }) {
                     <p className="mobile-label">Votes</p>
                     <p>
                       {format(
-                        BigNumber(Web3.utils.fromWei(item.votes, 'ether'))
+                        BigNumber(String(item.votes))
                           .dp(8, 1)
                           .toString(10)
                       )}

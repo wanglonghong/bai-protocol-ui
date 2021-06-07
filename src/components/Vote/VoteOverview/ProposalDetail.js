@@ -41,8 +41,8 @@ function ProposalDetail({ proposalInfo }) {
             Operation
           </Label>
           <Label size="14">
-            {(proposalInfo.actions || []).map((s, idx) => (
-              <ReactMarkdown className="proposal-detail" source={s.title} key={idx} />
+            {(proposalInfo.signatures || []).map((s, idx) => (
+              <ReactMarkdown className="proposal-detail" source={s} key={idx} />
             ))}
           </Label>
         </div>
