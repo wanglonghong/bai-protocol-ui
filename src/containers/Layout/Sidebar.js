@@ -553,7 +553,7 @@ function Sidebar({ history, settings, setSetting, getGovernanceVenus }) {
     try {
       let [vaultVaiStaked, venusVAIVaultRate] = await Promise.all([
         methods.call(vaiContract.methods.balanceOf, [constants.CONTRACT_VAI_VAULT_ADDRESS]),
-        methods.call(appContract.methods.venusVAIVaultRate, [])
+        methods.call(appContract.methods.bidaoBAIVaultRate, [])
       ]);
   
       // Total Vai Staked

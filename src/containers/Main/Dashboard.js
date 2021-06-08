@@ -61,8 +61,8 @@ function Dashboard({ settings, setSetting }) {
         allowBalance
       ] = await Promise.all([
         methods.call(vaiContract.methods.balanceOf, [accountAddress]),
-        methods.call(appContract.methods.mintedVAIs, [accountAddress]),
-        methods.call(vaiControllerContract.methods.getMintableVAI, [accountAddress]),
+        methods.call(appContract.methods.mintedBAIs, [accountAddress]),
+        methods.call(vaiControllerContract.methods.getMintableBAI, [accountAddress]),
         methods.call(vaiContract.methods.allowance, [accountAddress, constants.CONTRACT_VAI_UNITROLLER_ADDRESS]),
       ]);
       userVaiBalance = new BigNumber(userVaiBalance).div(new BigNumber(10).pow(18));
@@ -116,6 +116,7 @@ function Dashboard({ settings, setSetting }) {
 
         const tokenDecimal = settings.decimals[item.id].token;
         const vBepContract = getVbepContract(item.id);
+        
         asset.collateral = assetsIn.map(item => item.toLowerCase()).includes(asset.vtokenAddress.toLowerCase());
 
         let borrowBalance, supplyBalance, totalBalance;

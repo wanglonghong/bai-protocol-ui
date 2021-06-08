@@ -154,7 +154,7 @@ function VotingWallet({
       const appContract = getComptrollerContract();
       methods
         .send(
-          appContract.methods.claimVenus,
+          appContract.methods.claimBidao,
           [settings.selectedAddress],
           settings.selectedAddress
         )

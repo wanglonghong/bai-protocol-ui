@@ -77,7 +77,7 @@ function RepayVaiTab({ settings }) {
       setIsLoading(true);
       methods
         .send(
-          appContract.methods.repayVAI,
+          appContract.methods.repayBAI,
           [
             amount.times(new BigNumber(10).pow(18)).dp(0).toString(10)
           ],

@@ -62,7 +62,7 @@ function MintTab({ settings }) {
       setIsLoading(true);
       methods
         .send(
-          appContract.methods.mintVAI,
+          appContract.methods.mintBAI,
           [
             amount.times(new BigNumber(10).pow(18)).dp(0).toString(10)
           ],

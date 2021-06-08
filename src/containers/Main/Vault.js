@@ -69,13 +69,13 @@ function Vault({ settings }) {
       vaiReward,
       allowBalance
     ] = await Promise.all([
-      methods.call(compContract.methods.venusVAIVaultRate, []),
+      methods.call(compContract.methods.bidaoBAIVaultRate, []),
       methods.call(xvsTokenContract.methods.balanceOf, [
         constants.CONTRACT_VAI_VAULT_ADDRESS
       ]),
       methods.call(tokenContract.methods.balanceOf, [settings.selectedAddress]),
       methods.call(vaultContract.methods.userInfo, [settings.selectedAddress]),
-      methods.call(vaultContract.methods.pendingXVS, [
+      methods.call(vaultContract.methods.pendingXBID, [
         settings.selectedAddress
       ]),
       methods.call(tokenContract.methods.allowance, [

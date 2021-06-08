@@ -218,7 +218,7 @@ function XVS({ settings }) {
 
     // total info
     let venusVAIVaultRate = await methods.call(
-      compContract.methods.venusVAIVaultRate,
+      compContract.methods.bidaoBAIVaultRate,
       []
     );
     venusVAIVaultRate = new BigNumber(venusVAIVaultRate)

@@ -117,21 +117,22 @@ function Vote({ settings, getProposals, setSetting }) {
     const vaiContract = getVaiControllerContract();
 
     let [venusInitialIndex, venusAccrued, venusVAIState, vaiMinterIndex, vaiMinterAmount] = await Promise.all([
-      methods.call(appContract.methods.venusInitialIndex, []),
-      methods.call(appContract.methods.venusAccrued, [myAddress]),
-      methods.call(vaiContract.methods.venusVAIState, []),
-      methods.call(vaiContract.methods.venusVAIMinterIndex, [myAddress]),
-      methods.call(appContract.methods.mintedVAIs, [myAddress]),
+      methods.call(appContract.methods.bidaoInitialIndex, []),
+      methods.call(appContract.methods.bidaoAccrued, [myAddress]),
+      methods.call(vaiContract.methods.bidaoBAIState, []),
+      methods.call(vaiContract.methods.bidaoBAIMinterIndex, [myAddress]),
+      methods.call(appContract.methods.mintedBAIs, [myAddress]),
     ]);
     let venusEarned = new BigNumber(0);
     await Promise.all(Object.values(constants.CONTRACT_VBEP_ADDRESS).map(async (item, index) => {
+      console.log('item', item)
       const vBepContract = getVbepContract(item.id);
       let [supplyState, supplierIndex, supplierTokens, borrowState, borrowerIndex, borrowBalanceStored, borrowIndex] = await Promise.all([
-        methods.call(appContract.methods.venusSupplyState, [item.address]),
-        methods.call(appContract.methods.venusSupplierIndex, [item.address, myAddress]),
+        methods.call(appContract.methods.bidaoSupplyState, [item.address]),
+        methods.call(appContract.methods.bidaoSupplierIndex, [item.address, myAddress]),
         methods.call(vBepContract.methods.balanceOf, [myAddress]),
-        methods.call(appContract.methods.venusBorrowState, [item.address]),
-        methods.call(appContract.methods.venusBorrowerIndex, [item.address, myAddress]),
+        methods.call(appContract.methods.bidaoBorrowState, [item.address]),
+        methods.call(appContract.methods.bidaoBorrowerIndex, [item.address, myAddress]),
         methods.call(vBepContract.methods.borrowBalanceStored, [myAddress]),
         methods.call(vBepContract.methods.borrowIndex, []),
       ]);
