@@ -125,7 +125,6 @@ function Vote({ settings, getProposals, setSetting }) {
     ]);
     let venusEarned = new BigNumber(0);
     await Promise.all(Object.values(constants.CONTRACT_VBEP_ADDRESS).map(async (item, index) => {
-      console.log('item', item)
       const vBepContract = getVbepContract(item.id);
       let [supplyState, supplierIndex, supplierTokens, borrowState, borrowerIndex, borrowBalanceStored, borrowIndex] = await Promise.all([
         methods.call(appContract.methods.bidaoSupplyState, [item.address]),

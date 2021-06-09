@@ -272,7 +272,6 @@ function XVS({ settings }) {
     //   supplyAPY: settings.vaiAPY || 0,
     //   borrowAPY: 0
     // });
-    console.log('XVS', tempMarkets)
     setMarkets(tempMarkets);
   };
 

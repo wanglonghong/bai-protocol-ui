@@ -148,7 +148,7 @@ function Overview({ settings, getMarketHistory }) {
     tempData = res.data.result
       .map(m => {
         return {
-          createdAt: m.createdAt,
+          createdAt: m.updatedAt,
           supplyApy: +new BigNumber(m.supplyApy || 0).dp(8, 1).toString(10),
           borrowApy: +new BigNumber(m.borrowApy || 0).dp(8, 1).toString(10)
         };
