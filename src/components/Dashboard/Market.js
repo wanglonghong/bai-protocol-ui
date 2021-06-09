@@ -79,7 +79,7 @@ const Market = ({ settings, setSetting }) => {
       };
       tempArr.push(temp);
     });
-    console.log('build markets',settings.assetList, tempArr)
+
 
     const tempSuppliedData = [];
     const tempNonSuppliableData = [];
