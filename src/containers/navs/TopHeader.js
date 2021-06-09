@@ -1,8 +1,24 @@
+import {
+  Nav,
+  NavItem,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from 'reactstrap';
+import {
+  HeaderContainer,
+  HeaderWrapper,
+  TopbarWrapper,
+  TopMenu,
+  HeroSection,
+} from './styles';
+
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { compose } from 'recompose';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink, withRouter,useLocation,Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { Select, Icon } from 'antd';
 import BigNumber from 'bignumber.js';
@@ -24,232 +40,15 @@ import logoImg from 'assets/img/logo.png';
 import commaNumber from 'comma-number';
 import { checkIsValidNetwork, getBigNumber } from 'utilities/common';
 import toast from 'components/Basic/Toast';
-import XVSIcon from 'assets/img/venus.svg';
-import XVSActiveIcon from 'assets/img/venus_active.svg';
 
-const SidebarWrapper = styled.div`
-  height: 100vh;
-  min-width: 108px;
-  border-radius: 25px;
-  background-color: var(--color-bg-primary);
-  display: flex;
-  flex-direction: column;
-  margin-right: 30px;
+import menuItems, { topMenuItems } from './menu';
 
-  @media only screen and (max-width: 768px) {
-    display: flex;
-    height: 60px;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: 0px;
-  }
-`;
-
-const Logo = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 54px;
-  i {
-    font-size: 18px;
-  }
-  img {
-    width: 115px;
-  }
-
-  @media only screen and (max-width: 768px) {
-    padding: 0 20px;
-    img {
-      width: 60px;
-    }
-  }
-
-  @media only screen and (max-width: 1280px) {
-    i {
-      font-size: 12px !important;
-    }
-    img {
-      width: 80px !important;
-    }
-  }
-`;
-
-const MainMenu = styled.div`
-  margin-top: 140px;
-
-  @media only screen and (max-width: 768px) {
-    margin: 0 20px;
-  }
-
-  .xvs-active-icon {
-    display: none;
-  }
-
-  a {
-    padding: 7px;
-    i,
-    img {
-      width: 20%;
-      margin: 0 10%;
-      svg {
-        fill: var(--color-text-main);
-      }
-    }
-    img {
-      width: 10%;
-      margin: 0 13%;
-    }
-    span {
-      width: 80%;
-    }
-    @media only screen and (max-width: 1440px) {
-      span {
-        font-size: 14px;
-      }
-    }
-
-    @media only screen and (max-width: 1280px) {
-      span {
-        font-size: 12px;
-      }
-    }
-    &:not(:last-child) {
-      margin-bottom: 48px;
-    }
-
-    &:hover {
-      svg {
-        fill: var(--color-blue);
-      }
-      span {
-        color: var(--color-blue);
-      }
-      .xvs-icon {
-        display: none;
-      }
-      .xvs-active-icon {
-        display: block;
-      }
-    }
-  }
-
-  .active {
-    background-color: var(--color-bg-active);
-    svg {
-      fill: var(--color-blue);
-    }
-    span {
-      color: var(--color-blue);
-    }
-    .xvs-icon {
-      display: none;
-    }
-    .xvs-active-icon {
-      display: block;
-    }
-  }
-
-  @media only screen and (max-width: 768px) {
-    display: none;
-  }
-`;
-
-const FaucetMenu = styled.div`
-  width: 100%;
-  margin-top: auto;
-  margin-bottom: 20px;
-  a {
-    padding: 7px 0px;
-    svg {
-      fill: var(--color-text-main);
-      margin-left: 34px;
-      margin-right: 26px;
-    }
-    &:not(:last-child) {
-      margin-bottom: 48px;
-    }
-
-    &:hover {
-      svg {
-        fill: var(--color-yellow);
-      }
-      span {
-        color: var(--color-yellow);
-      }
-    }
-
-    @media only screen and (max-width: 1440px) {
-      span {
-        font-size: 14px;
-      }
-    }
-
-    @media only screen and (max-width: 1280px) {
-      span {
-        font-size: 12px;
-      }
-    }
-  }
-  .active {
-    background-color: var(--color-bg-active);
-    svg {
-      fill: var(--color-yellow);
-    }
-    span {
-      color: var(--color-yellow);
-    }
-  }
-
-  @media only screen and (max-width: 768px) {
-    display: none;
-  }
-`;
-
-const TotalValue = styled.div`
-  width: 100%;
-  margin-bottom: 20px;
-
-  > div {
-    span:first-child {
-      word-break: break-all;
-      text-align: center;
-    }
-  }
-
-  @media only screen and (max-width: 768px) {
-    display: none;
-  }
-`;
-
-const MobileMenu = styled.div`
-  display: none;
-
-  @media only screen and (max-width: 768px) {
-    display: block;
-    position: relative;
-    .ant-select {
-      .ant-select-selection {
-        background-color: transparent;
-        border: none;
-        color: var(--color-text-main);
-        font-size: 17px;
-        font-weight: 900;
-        color: var(--color-text-main);
-        margin-top: 4px;
-        i {
-          color: var(--color-text-main);
-        }
-      }
-    }
-  }
-`;
+import logoImage from 'assets/img/logo.png';
 
 const ConnectButton = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
-
+  
   @media only screen and (max-width: 768px) {
     margin: 0;
   }
@@ -277,8 +76,6 @@ const ConnectButton = styled.div`
   }
 `;
 
-const { Option } = Select;
-
 let metamask = null;
 let accounts = [];
 let metamaskWatcher = null;
@@ -286,7 +83,7 @@ const abortController = new AbortController();
 
 const format = commaNumber.bindWith(',', '.');
 
-function Sidebar({ history, settings, setSetting, getGovernanceVenus }) {
+const TopHeader = ({ history, settings, setSetting, getGovernanceVenus }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isMarketInfoUpdating, setMarketInfoUpdating] = useState(false);
   const [error, setError] = useState('');
@@ -296,7 +93,14 @@ function Sidebar({ history, settings, setSetting, getGovernanceVenus }) {
   const [tvl, setTVL] = useState(new BigNumber(0));
   const [wcUri, setWcUri] = useState(null);
 
-  const defaultPath = history.location.pathname.split('/')[1];
+  const [selectedMenu, setSelectedMenu] = useState('');
+  const [selectedPath, setSelectedPath] = useState('');
+  const [hoverMenu, setHoverMenu] = useState('');
+  const [mobileRedirect, setMobileRedirect] = useState(false);
+  const [menuItem, setMenuItem] = useState(menuItems[0]);
+
+  const path = useLocation().pathname;
+
   const checkNetwork = () => {
     let netId;
     if (settings.walletType === 'binance') {
@@ -609,148 +413,162 @@ function Sidebar({ history, settings, setSetting, getGovernanceVenus }) {
     if (!settings.selectedAddress) return;
     handleAccountChange();
   }, [settings.selectedAddress]);
+
+  const handleSelectedMenu = (item) => {
+    setSelectedMenu(item.id);
+    setMenuItem(item);
+    setSelectedPath('');
+  };
+
+  const handleHoverMenu = (id) => {
+    setHoverMenu(id);
+  };
+
+  const handleLeaveMenu = () => {
+    setHoverMenu('');
+  };
+
+  const handleMenu = (item) => {
+    setMenuItem(item);
+    setSelectedMenu(item.id);
+    setSelectedPath('');
+    setMobileRedirect(true);
+  };
+
+  useEffect(() => {
+    setSelectedPath(path === '/' ? '/dashboard' : path);
+  }, [path]);
+
   return (
-    <SidebarWrapper>
-      <Logo>
-        <NavLink to="/" activeClassName="active">
-          <img src={logoImg} alt="logo" className="logo-text" />
-        </NavLink>
-      </Logo>
-      <MainMenu>
-        <NavLink
-          className="flex flex-start align-center"
-          to="/dashboard"
-          activeClassName="active"
-        >
-          <Icon type="home" theme="filled" />
-          <Label primary>Dashboard</Label>
-        </NavLink>
-        <NavLink
-          className="flex flex-start align-center"
-          to="/vote"
-          activeClassName="active"
-        >
-          <Icon type="appstore" />
-          <Label primary>Vote</Label>
-        </NavLink>
-        <NavLink
-          className="flex flex-start align-center"
-          to="/xbid"
-          activeClassName="active"
-        >
-          <img className="xvs-icon" src={XVSIcon} alt="xbid" />
-          <img className="xvs-active-icon" src={XVSActiveIcon} alt="xbid" />
-          <Label primary>XBID</Label>
-        </NavLink>
-        <NavLink
-          className="flex flex-start align-center"
-          to="/market"
-          activeClassName="active"
-        >
-          <Icon type="area-chart" />
-          <Label primary>Market</Label>
-        </NavLink>
-        <NavLink
-          className="flex flex-start align-center"
-          to="/vault"
-          activeClassName="active"
-        >
-          <Icon type="golden" theme="filled" />
-          <Label primary>Vault</Label>
-        </NavLink>
-      </MainMenu>
-      <FaucetMenu>
-        {process.env.REACT_APP_ENV === 'dev' && (
-          <NavLink
-            className="flex just-center"
-            to="/faucet"
-            activeClassName="active"
-          >
-            <Label primary>Faucet</Label>
-          </NavLink>
-        )}
-      </FaucetMenu>
-      {settings.selectedAddress && (
-        <TotalValue>
-          <div className="flex flex-column align-center just-center">
-            <Label primary>
-              ${format(new BigNumber(tvl).dp(2, 1).toString(10))}
-            </Label>
-            <Label className="center">Total Value Locked</Label>
+    <>
+      {mobileRedirect && <Redirect to={menuItem.to} />}
+      <HeaderContainer>
+        <HeaderWrapper>
+          <TopbarWrapper>
+            <div className="container d-flex justify-content-between align-items-center">
+              <NavLink to="/" className="logo-wrapper">
+                <img src={logoImage} />
+              </NavLink>
+              <TopMenu>
+                <Nav className="top-menu">
+                  {topMenuItems.map((item, index) => {
+                    if (!item.child)
+                      return (
+                        <NavItem
+                          key={`__key-${index.toString()}`}
+                          className={
+                            selectedMenu === item.id || selectedPath === item.to
+                              ? 'active'
+                              : ''
+                          }
+                        >
+                          <NavLink
+                            to={item.to}
+                            className={
+                              selectedMenu === item.id ||
+                              selectedPath === item.to
+                                ? 'menu-active'
+                                : ''
+                            }
+                            onClick={() => handleSelectedMenu(item)}
+                            onMouseOver={() => handleHoverMenu(item.id)}
+                            onMouseLeave={() => handleLeaveMenu()}
+                          >
+                            {item.icon && (
+                              <img src={item.icon} alt={item.label} />
+                            )}
+                            {item.label}
+                          </NavLink>
+                        </NavItem>
+                      );
+                    return (
+                      <UncontrolledDropdown
+                        key={`__key-${index.toString()}`}
+                        nav
+                        inNavbar
+                      >
+                        <DropdownToggle nav caret>
+                          {item.icon && (
+                            <img src={item.icon} alt={item.label} />
+                          )}
+                          {item.label}
+                        </DropdownToggle>
+                        <DropdownMenu right>
+                          {item.child.map((child, childIndex) => {
+                            return (
+                              <DropdownItem key={childIndex.toString()}>
+                                {child.icon && (
+                                  <img
+                                    src={child.icon && child.icon}
+                                    alt={child.label}
+                                    width={20}
+                                    height={20}
+                                  />
+                                )}
+                                {child.label}
+                              </DropdownItem>
+                            );
+                          })}
+                        </DropdownMenu>
+                      </UncontrolledDropdown>
+                    );
+                  })}
+                </Nav>
+                <ConnectButton>
+                  {!settings.selectedAddress && (
+                    <Button
+                      className="connect-btn"
+                      onClick={() => {
+                        setIsOpenModal(true);
+                      }}
+                    >
+                      Connect
+                    </Button>
+                  )}
+                </ConnectButton>
+              </TopMenu>
+            </div>
+          </TopbarWrapper>
+          <div className="menu-wrapper">
+            <Nav className="container d-flex justify-content-between align-items-center">
+              {menuItems.map((item, index) => {
+                return (
+                  <NavItem
+                    key={`__key-${index.toString()}`}
+                    className={
+                      selectedMenu === item.id || selectedPath === item.to
+                        ? 'active'
+                        : ''
+                    }
+                  >
+                    <NavLink
+                      to={item.to}
+                      className={
+                        selectedMenu === item.id || selectedPath === item.to
+                          ? 'menu-active'
+                          : ''
+                      }
+                      onClick={() => handleSelectedMenu(item)}
+                      onMouseOver={() => handleHoverMenu(item.id)}
+                      onMouseLeave={() => handleLeaveMenu()}
+                    >
+                      {item.label}
+                    </NavLink>
+                  </NavItem>
+                );
+              })}
+            </Nav>
           </div>
-        </TotalValue>
-      )}
-      {settings.selectedAddress && (
-        <TotalValue>
-          <div className="flex flex-column align-center just-center">
-            <Label primary>
-              {format(
-                getBigNumber(totalVaiMinted)
-                  .dp(0, 1)
-                  .toString(10)
-              )}
-            </Label>
-            <Label className="center">Total BAI Minted</Label>
+        </HeaderWrapper>
+        <HeroSection show={path == '/dashboard'}>
+          <div className="hero-text d-flex justify-content-center align-items-end flex-column">
+            <h1 className="">
+              <span className="text-primary">Bidao</span> Exchange
+            </h1>
+            <p className="text-secondary">By Bidao</p>
           </div>
-        </TotalValue>
-      )}
-      <ConnectButton>
-        {!settings.selectedAddress && (
-          <Button
-            className="connect-btn"
-            onClick={() => {
-              setIsOpenModal(true);
-            }}
-          >
-            Connect
-          </Button>
-        )}
-      </ConnectButton>
-      <MobileMenu id="main-menu">
-        <Select
-          defaultValue={defaultPath}
-          style={{ width: 120, marginRight: 10 }}
-          getPopupContainer={() => document.getElementById('main-menu')}
-          dropdownMenuStyle={{
-            backgroundColor: '#090d27'
-          }}
-          dropdownClassName="asset-select"
-          onChange={onChangePage}
-        >
-          <Option className="flex align-center just-center" value="dashboard">
-            <Label size={14} primary>
-              Dashboard
-            </Label>
-          </Option>
-          <Option className="flex align-center just-center" value="vote">
-            <Label size={14} primary>
-              Vote
-            </Label>
-          </Option>
-          <Option className="flex align-center just-center" value="xvs">
-            <Label size={14} primary>
-              XBID
-            </Label>
-          </Option>
-          <Option className="flex align-center just-center" value="market">
-            <Label size={14} primary>
-              Market
-            </Label>
-          </Option>
-          <Option className="flex align-center just-center" value="vault">
-            <Label size={14} primary>
-              Vault
-            </Label>
-          </Option>
-          {/* {process.env.REACT_APP_ENV === 'dev' && (
-            <Option className="flex align-center just-center" value="faucet">
-              <Label size={14} primary>
-                Faucet
-              </Label>
-            </Option>
-          )} */}
-        </Select>
-      </MobileMenu>
+        </HeroSection>
+      </HeaderContainer>
       <ConnectModal
         visible={isOpenModal}
         web3={web3}
@@ -761,18 +579,19 @@ function Sidebar({ history, settings, setSetting, getGovernanceVenus }) {
         onConnectMetaMask={handleMetaMask}
         onBack={() => setWcUri(null)}
       />
-    </SidebarWrapper>
+    </>
   );
-}
+};
 
-Sidebar.propTypes = {
+
+TopHeader.propTypes = {
   history: PropTypes.object,
   settings: PropTypes.object,
   setSetting: PropTypes.func.isRequired,
   getGovernanceVenus: PropTypes.func.isRequired
 };
 
-Sidebar.defaultProps = {
+TopHeader.defaultProps = {
   settings: {},
   history: {}
 };
@@ -796,4 +615,5 @@ const mapDispatchToProps = dispatch => {
 export default compose(
   withRouter,
   connectAccount(mapStateToProps, mapDispatchToProps)
-)(Sidebar);
+)(TopHeader);
+

@@ -11,7 +11,7 @@ import { getVbepContract, methods } from 'utilities/ContractService';
 import commaNumber from 'comma-number';
 import arrowRightImg from 'assets/img/arrow-right.png';
 import coinImg from 'assets/img/venus_32.png';
-import vaiImg from 'assets/img/coins/vai.svg';
+import vaiImg from 'assets/img/coins/vai.png';
 import { TabSection, Tabs, TabContent } from 'components/Basic/BorrowModal';
 import { getBigNumber } from 'utilities/common';
 
@@ -225,13 +225,13 @@ function BorrowTab({ asset, settings, changeTab, onCancel, setSetting }) {
                 src={vaiImg}
                 alt="asset"
               />
-              <span>Repay VAI Balance</span>
+              <span>Repay BAI Balance</span>
             </div>
             <span>
               {getBigNumber(settings.userVaiMinted)
                 .dp(2, 1)
                 .toString(10)}{' '}
-              VAI
+              BAI
             </span>
           </div>
           {!new BigNumber(asset.borrowCaps || 0).isZero() && (

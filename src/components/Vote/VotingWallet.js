@@ -94,7 +94,7 @@ const VotingWalletWrapper = styled.div`
     width: 50%;
     height: 46px;
     border-radius: 5px;
-    background-image: linear-gradient(to right, #f2c265, #f7b44f);
+    background-image: linear-gradient(to right,rgb(28,183,247),rgb(18,153,207));
     .MuiButton-label {
       font-size: 13px;
       font-weight: 500;
@@ -174,7 +174,7 @@ function VotingWallet({
           <p className="title">Voting Wallet</p>
         </div>
         <div className="flex flex-column content">
-          <p className="content-label">Venus Balance</p>
+          <p className="content-label">Bidao Balance</p>
           <div className="flex align-center just-between">
             <div className="flex align-center">
               <img src={coinImg} alt="coin" />
@@ -190,7 +190,7 @@ function VotingWallet({
           {!isLoadingEarn && (
             <div className="flex align-center just-between">
               <div className="flex flex-column">
-                <p className="content-label">Venus Earned</p>
+                <p className="content-label">Bidao Earned</p>
                 <div className="flex align-center">
                   <img src={coinImg} alt="coin" />
                   <p className="content-value">
@@ -198,7 +198,7 @@ function VotingWallet({
                     <span>{getAfter(format(earnedBalance))}</span>
                   </p>
                 </div>
-                <div className="mint-content-label">VAI Mint Earned</div>
+                <div className="mint-content-label">BAI Mint Earned</div>
                 <div className="flex align-center">
                   <img src={coinImg} alt="coin" />
                   <p className="content-value">
@@ -255,8 +255,8 @@ function VotingWallet({
             <p className="setup-header">Setup Voting</p>
             <p className="setup-content">
               You can either vote on each proposal yourself or delegate your
-              votes to a third party. Venus Governance puts you in charge of the
-              future of Venus.
+              votes to a third party. Bidao Governance puts you in charge of the
+              future of Bidao.
               {/* <a href="/#">Learn more.</a> */}
             </p>
           </div>

@@ -13,8 +13,8 @@ const CardWrapper = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 25px;
-  background-color: #181c3a;
-  background-image: linear-gradient(to right, #f2c265, #f7b44f);
+  background-color: var(--color-bg-primary);
+  background-image: linear-gradient(to right,rgb(28,183,247),rgb(18,153,207));
   padding: 20px 30px;
 
   .usd-price {

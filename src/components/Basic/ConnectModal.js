@@ -172,7 +172,7 @@ function ConnectModal({
             </div>
           )}
           <img src={logoImg} alt="logo" className="logo-image" />
-          <p className="title">Connect to start using Venus</p>
+          <p className="title">Connect to start using Bidao</p>
         </div>
         <div className="connect-wallet-content">
           {!wcUri && (
@@ -235,7 +235,7 @@ function ConnectModal({
           )}
         </div>
         <p className="center terms-of-use">
-          <span>By connecting, I accept Venus&lsquo;s</span>
+          <span>By connecting, I accept Bidao&lsquo;s</span>
           <a href="https://www.swipe.io/terms" target="_blank" rel="noreferrer">
             Terms of Service
           </a>

@@ -65,7 +65,7 @@ function CoinInfo({ settings }) {
 
   const updateBalance = useCallback(async () => {
     if (window.ethereum && checkIsValidNetwork() && settings.selectedAddress) {
-      const xvsTokenContract = getTokenContract('xvs');
+      const xvsTokenContract = getTokenContract('xbid');
       let temp = await methods.call(xvsTokenContract.methods.balanceOf, [
         settings.selectedAddress
       ]);
@@ -80,7 +80,7 @@ function CoinInfo({ settings }) {
 
   const handleLink = () => {
     window.open(
-      `${process.env.REACT_APP_BSC_EXPLORER}/token/${constants.CONTRACT_TOKEN_ADDRESS.xvs.address}?a=${address}`,
+      `${process.env.REACT_APP_BSC_EXPLORER}/token/${constants.CONTRACT_TOKEN_ADDRESS.xbid.address}?a=${address}`,
       '_blank'
     );
   };
@@ -97,13 +97,13 @@ function CoinInfo({ settings }) {
       <CardWrapper className="flex align-center just-between">
         <div className="flex align-center">
           <img src={coinImg} alt="coin" />
-          <p>{format(balance)} XVS</p>
+          <p>{format(balance)} XBID</p>
           {window.ethereum && (
             <Icon
               className="add-xvs-token"
               type="plus-circle"
               theme="filled"
-              onClick={() => addToken('xvs', 18, 'token')}
+              onClick={() => addToken('xbid', 18, 'token')}
             />
           )}
         </div>

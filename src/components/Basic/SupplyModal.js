@@ -48,7 +48,7 @@ export const TabSection = styled.div`
         border: none;
         height: 100%;
         font-size: 40px;
-        color: var(--color-yellow);
+        color: var(--color-blue);
         text-align: center;
         background: transparent;
         &:focus {
@@ -139,7 +139,7 @@ export const TabSection = styled.div`
     width: 248px;
     height: 41px;
     border-radius: 5px;
-    background-image: linear-gradient(to right, #f2c265, #f7b44f);
+    background-image: linear-gradient(to right,rgb(28,183,247),rgb(18,153,207));
 
     .MuiButton-label {
       font-size: 16px;

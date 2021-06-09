@@ -61,7 +61,7 @@ function Holding({ address, holdingInfo }) {
       <HoldingWrapper className="flex flex-column">
         <div className="title">Holding</div>
         <div className="flex flex-column holding-section">
-          <div className="label">Venus Balance</div>
+          <div className="label">Bidao Balance</div>
           <div className="value">{format(holdingInfo.balance || '0.0000')}</div>
         </div>
         <div className="flex flex-column holding-section">

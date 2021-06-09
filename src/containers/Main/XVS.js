@@ -18,7 +18,7 @@ import MainLayout from 'containers/Layout/MainLayout';
 import LoadingSpinner from 'components/Basic/LoadingSpinner';
 import * as constants from 'utilities/constants';
 import coinImg from 'assets/img/venus_32.png';
-import vaiImg from 'assets/img/coins/vai.svg';
+import vaiImg from 'assets/img/coins/vai.png';
 
 const XVSLayout = styled.div`
   .main-content {
@@ -224,7 +224,7 @@ function XVS({ settings }) {
     venusVAIVaultRate = new BigNumber(venusVAIVaultRate)
       .div(1e18)
       .times(20 * 60 * 24);
-    const tokenContract = getTokenContract('xvs');
+    const tokenContract = getTokenContract('xbid');
     const remainedAmount = await methods.call(tokenContract.methods.balanceOf, [
       constants.CONTRACT_COMPTROLLER_ADDRESS
     ]);
@@ -267,11 +267,12 @@ function XVS({ settings }) {
       });
     }
     // tempMarkets.push({
-    //   underlyingSymbol: 'VAI',
+    //   underlyingSymbol: 'BAI',
     //   perDay: +venusVAIVaultRate.dp(2, 1).toString(10),
     //   supplyAPY: settings.vaiAPY || 0,
     //   borrowAPY: 0
     // });
+    console.log('XVS', tempMarkets)
     setMarkets(tempMarkets);
   };
 
@@ -448,13 +449,11 @@ function XVS({ settings }) {
                             lg={{ span: 8 }}
                             className="flex align-center market"
                           >
-                            {item.underlyingSymbol !== 'VAI' ? (
+                            {item.underlyingSymbol !== 'BAI' ? (
                               <img
                                 className="asset-img"
                                 src={
-                                  constants.CONTRACT_TOKEN_ADDRESS[
-                                    item.underlyingSymbol.toLowerCase()
-                                  ].asset
+                                  Object.values(constants.CONTRACT_TOKEN_ADDRESS).find(token => token.symbol.toLowerCase() == item.underlyingSymbol.toLowerCase()).asset
                                 }
                                 alt="asset"
                               />
@@ -489,7 +488,7 @@ function XVS({ settings }) {
                             className="borrow-apy right"
                           >
                             <p className="mobile-label">Borrow APY</p>
-                            {item.underlyingSymbol !== 'VAI' ? (
+                            {item.underlyingSymbol !== 'BAI' ? (
                               <p>{item.borrowAPY}%</p>
                             ) : (
                               <p>-</p>

@@ -14,11 +14,11 @@ export default class BinanceWalletConnectClass {
         : 'https://bsc-dataseed.binance.org'
     );
     this.TOKEN_ABI = {
-      sxp: constants.CONTRACT_SXP_TOKEN_ABI,
+      xdao: constants.CONTRACT_SXP_TOKEN_ABI,
       usdc: constants.CONTRACT_USDC_TOKEN_ABI,
       usdt: constants.CONTRACT_USDT_TOKEN_ABI,
       busd: constants.CONTRACT_BUSD_TOKEN_ABI,
-      xvs: constants.CONTRACT_XVS_TOKEN_ABI
+      xbid: constants.CONTRACT_XVS_TOKEN_ABI
     };
   }
 

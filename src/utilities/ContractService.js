@@ -8,11 +8,11 @@ import * as constants from './constants';
 const instance = new Web3(window.ethereum);
 
 const TOKEN_ABI = {
-  sxp: constants.CONTRACT_SXP_TOKEN_ABI,
+  xdao: constants.CONTRACT_SXP_TOKEN_ABI,
   usdc: constants.CONTRACT_USDC_TOKEN_ABI,
   usdt: constants.CONTRACT_USDT_TOKEN_ABI,
   busd: constants.CONTRACT_BUSD_TOKEN_ABI,
-  xvs: constants.CONTRACT_XVS_TOKEN_ABI,
+  xbid: constants.CONTRACT_XVS_TOKEN_ABI,
   btcb: constants.CONTRACT_BTCB_TOKEN_ABI,
   eth: constants.CONTRACT_ETH_TOKEN_ABI,
   ltc: constants.CONTRACT_LTC_TOKEN_ABI,

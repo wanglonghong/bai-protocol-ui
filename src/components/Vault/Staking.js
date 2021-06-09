@@ -60,7 +60,7 @@ const StakingWrapper = styled.div`
         border: none;
         height: 100%;
         font-size: 40px;
-        color: var(--color-yellow);
+        color: var(--color-blue);
         text-align: center;
         background: transparent;
         &:focus {
@@ -84,7 +84,7 @@ const StakingWrapper = styled.div`
       width: 248px;
       height: 41px;
       border-radius: 5px;
-      background-image: linear-gradient(to right, #f2c265, #f7b44f);
+      background-image: linear-gradient(to right,rgb(28,183,247),rgb(18,153,207));
 
       .MuiButton-label {
         font-size: 16px;
@@ -111,7 +111,7 @@ function Staking({
   const [withdrawAmount, setWithdrawAmount] = useState(new BigNumber(0));
 
   /**
-   * Stake VAI
+   * Stake BAI
    */
   const handleStakeVAI = () => {
     const appContract = getVaiVaultContract();
@@ -138,7 +138,7 @@ function Staking({
   };
 
   /**
-   * Withdraw VAI
+   * Withdraw BAI
    */
   const handleWithdrawVAI = () => {
     const appContract = getVaiVaultContract();
@@ -193,12 +193,12 @@ function Staking({
       <StakingWrapper>
         <div className="stake-section">
           <div className="stake-info">
-            Available VAI to stake: {format(availableVai.dp(4, 1).toString(10))}{' '}
-            VAI
+            Available BAI to stake: {format(availableVai.dp(4, 1).toString(10))}{' '}
+            BAI
           </div>
           {!isEnabled ? (
             <p className="stake-warning">
-              To stake VAI, you need to approve it first.
+              To stake BAI, you need to approve it first.
             </p>
           ) : (
             <div className="stake-input">
@@ -245,7 +245,7 @@ function Staking({
         </div>
         <div className="stake-section">
           <div className="stake-info">
-            VAI staked: {format(vaiStaked.dp(4, 1).toString(10))} VAI
+            BAI staked: {format(vaiStaked.dp(4, 1).toString(10))} BAI
           </div>
           <div className="stake-input">
             <NumberFormat

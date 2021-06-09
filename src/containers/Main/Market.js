@@ -155,6 +155,7 @@ function Market({ history, settings }) {
   const [availableLiquidity, setAvailableLiquidity] = useState('0');
   const [sortInfo, setSortInfo] = useState({ field: '', sort: 'desc' });
 
+  console.log(settings)
   const getTotalInfo = async () => {
     const vaiContract = getVaiTokenContract();
 
@@ -220,7 +221,7 @@ function Market({ history, settings }) {
             </div>
           </div>
           {settings.vaiAPY && (
-            <div className="vai-apy">VAI Staking APY: {settings.vaiAPY}%</div>
+            <div className="vai-apy">BAI Staking APY: {settings.vaiAPY}%</div>
           )}
           <Row className="table_header">
             <Col xs={{ span: 24 }} lg={{ span: 2 }} className="market" />
@@ -394,13 +395,7 @@ function Market({ history, settings }) {
                       <img
                         className="asset-img"
                         src={
-                          constants.CONTRACT_TOKEN_ADDRESS[
-                            item.underlyingSymbol.toLowerCase()
-                          ]
-                            ? constants.CONTRACT_TOKEN_ADDRESS[
-                                item.underlyingSymbol.toLowerCase()
-                              ].asset
-                            : null
+                          Object.values(constants.CONTRACT_TOKEN_ADDRESS).find(token => token.symbol.toLowerCase() == item.underlyingSymbol.toLowerCase())?.asset
                         }
                         alt="asset"
                       />

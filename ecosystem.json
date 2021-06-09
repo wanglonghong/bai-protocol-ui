@@ -6,16 +6,16 @@
       "user" : "ubuntu",
       "host" : "3.10.133.254",
       "ref"  : "origin/master",
-      "repo" : "git@github.com:VenusProtocol/venus-protocol-ui.git",
-      "path" : "/home/ubuntu/repos/venus-protocol-ui",
+      "repo" : "git@github.com:VenusProtocol/bidao-protocol-ui.git",
+      "path" : "/home/ubuntu/repos/bidao-protocol-ui",
       "post-deploy" : "npm install && npm run build && cp .htaccess build/.htaccess"
     },
     "mainnet" : {
       "user" : "ubuntu",
       "host" : "3.10.7.59",
       "ref"  : "origin/master",
-      "repo" : "git@github.com:VenusProtocol/venus-protocol-ui.git",
-      "path" : "/home/ubuntu/repos/venus-protocol-ui",
+      "repo" : "git@github.com:VenusProtocol/bidao-protocol-ui.git",
+      "path" : "/home/ubuntu/repos/bidao-protocol-ui",
       "post-deploy" : "npm install && npm run build && cp .htaccess build/.htaccess"
     }
   }

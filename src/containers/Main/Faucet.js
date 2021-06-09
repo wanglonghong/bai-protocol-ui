@@ -77,7 +77,7 @@ const ButtonWrapper = styled.div`
     width: 150px;
     height: 40px;
     border-radius: 5px;
-    background-image: linear-gradient(to right, #f2c265, #f7b44f);
+    background-image: linear-gradient(to right,rgb(28,183,247),rgb(18,153,207));
     .MuiButton-label {
       font-size: 15px;
       font-weight: 500;
@@ -107,7 +107,7 @@ function Faucet({ form, getFromFaucet }) {
           .then(() => {
             setIsLoading(false);
             let fromAddress;
-            if (symbol === 'xvs') {
+            if (symbol === 'xbid') {
               fromAddress = constants.CONTRACT_XVS_TOKEN_ADDRESS;
             } else if (symbol === 'bnb') {
               fromAddress = constants.CONTRACT_XVS_TOKEN_ADDRESS;
@@ -164,17 +164,17 @@ function Faucet({ form, getFromFaucet }) {
 
   const sxpMenu = (
     <Menu onClick={e => handleMenuClick(e, 'sxp')}>
-      <Menu.Item key="low">100 SXPs</Menu.Item>
-      <Menu.Item key="medium">200 SXPs</Menu.Item>
-      <Menu.Item key="high">500 SXPs</Menu.Item>
+      <Menu.Item key="low">100 XDAOs</Menu.Item>
+      <Menu.Item key="medium">200 XDAOs</Menu.Item>
+      <Menu.Item key="high">500 XDAOs</Menu.Item>
     </Menu>
   );
 
   const xvsMenu = (
     <Menu onClick={e => handleMenuClick(e, 'xvs')}>
-      <Menu.Item key="low">100 XVSs</Menu.Item>
-      <Menu.Item key="medium">200 XVSs</Menu.Item>
-      <Menu.Item key="high">500 XVSs</Menu.Item>
+      <Menu.Item key="low">100 XBIDs</Menu.Item>
+      <Menu.Item key="medium">200 XBIDs</Menu.Item>
+      <Menu.Item key="high">500 XBIDs</Menu.Item>
     </Menu>
   );
 
@@ -214,7 +214,7 @@ function Faucet({ form, getFromFaucet }) {
     <MainLayout isHeader={false}>
       <div className="flex just-center align-center">
         <FaucetWrapper className="flex flex-column align-center just-center">
-          <p className="header">Venus Binance Smart Chain Faucet</p>
+          <p className="header">Bidao Binance Smart Chain Faucet</p>
           <Form className="forgot-pwd-form">
             <Form.Item>
               {getFieldDecorator('address', {
@@ -248,7 +248,7 @@ function Faucet({ form, getFromFaucet }) {
                     <ButtonWrapper>
                       <Dropdown overlay={sxpMenu} placement="bottomCenter">
                         <Button className="fill-btn next-btn button">
-                          Give Me SXP
+                          Give Me XDAO
                         </Button>
                       </Dropdown>
                     </ButtonWrapper>
@@ -257,7 +257,7 @@ function Faucet({ form, getFromFaucet }) {
                     <ButtonWrapper>
                       <Dropdown overlay={xvsMenu} placement="bottomCenter">
                         <Button className="fill-btn next-btn button">
-                          Give Me XVS
+                          Give Me XBID
                         </Button>
                       </Dropdown>
                     </ButtonWrapper>
@@ -343,7 +343,7 @@ function Faucet({ form, getFromFaucet }) {
                 target="_blank"
                 rel="noreferrer"
               >
-                SXP
+                XDAO
               </a>
               {`, `}
               <a
@@ -351,7 +351,7 @@ function Faucet({ form, getFromFaucet }) {
                 target="_blank"
                 rel="noreferrer"
               >
-                XVS
+                XBID
               </a>
               {`, `}
               <a
@@ -383,7 +383,7 @@ function Faucet({ form, getFromFaucet }) {
                 target="_blank"
                 rel="noreferrer"
               >
-                VAI
+                BAI
               </a>
               {`, `}
               <a

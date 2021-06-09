@@ -60,7 +60,7 @@ class App extends React.Component {
               >
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/vote" component={Vote} />
-                <Route exact path="/xvs" component={XVS} />
+                <Route exact path="/xbid" component={XVS} />
                 <Route exact path="/market" component={Market} />
                 <Route exact path="/vault" component={Vault} />
                 <Route exact path="/market/:asset" component={MarketDetail} />

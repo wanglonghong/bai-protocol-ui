@@ -16,7 +16,7 @@ import { Card } from 'components/Basic/Card';
 const CardWrapper = styled.div`
   width: 100%;
   border-radius: 25px;
-  background-color: #181c3a;
+  background-color: var(--color-bg-primary);
   padding: 28px 25px 27px 25px;
 
   .asset-img {
@@ -161,7 +161,7 @@ function Overview({ settings, getMarketHistory }) {
     if (!currentAsset) return;
     if (settings.markets && settings.markets.length > 0) {
       const info = settings.markets.find(
-        item => item.underlyingSymbol.toLowerCase() === currentAsset
+        item => item.address.toLowerCase() === constants.CONTRACT_VBEP_ADDRESS[currentAsset].address.toLowerCase()
       );
       setMarketInfo(info || {});
     }
@@ -184,7 +184,7 @@ function Overview({ settings, getMarketHistory }) {
   }, [settings.selectedAddress, currentAsset]);
 
   useEffect(() => {
-    setCurrentAsset('sxp');
+    setCurrentAsset('xdao');
   }, []);
 
   useEffect(() => {
@@ -227,7 +227,7 @@ function Overview({ settings, getMarketHistory }) {
               id="asset"
             >
               <Select
-                defaultValue="sxp"
+                defaultValue="xdao"
                 style={{ width: 150, marginRight: 10 }}
                 getPopupContainer={() => document.getElementById('asset')}
                 dropdownMenuStyle={{
@@ -261,7 +261,7 @@ function Overview({ settings, getMarketHistory }) {
               <div className="flex align-center add-token-wrapper">
                 {currentAsset !== 'bnb' && (
                   <div className="flex align-center underlying-asset">
-                    {currentAsset.toUpperCase()}
+                    {constants.CONTRACT_TOKEN_ADDRESS[currentAsset].symbol.toUpperCase()}
                     <Icon
                       className="add-token"
                       type="plus-circle"
@@ -277,8 +277,8 @@ function Overview({ settings, getMarketHistory }) {
                   </div>
                 )}
                 <div className="flex align-center vtoken-asset">
-                  {`v${
-                    currentAsset === 'btcb' ? 'BTC' : currentAsset.toUpperCase()
+                  {`${
+                    constants.CONTRACT_VBEP_ADDRESS[currentAsset].symbol.toUpperCase()
                   }`}
                   <Icon
                     className="add-token"

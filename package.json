@@ -1,5 +1,5 @@
 {
-  "name": "venus",
+  "name": "bidao",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -33,6 +33,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "react-toastify": "^6.0.9",
+    "reactstrap": "^8.9.0",
     "recharts": "^1.8.5",
     "recompose": "0.26.0",
     "redux": "^4.0.4",

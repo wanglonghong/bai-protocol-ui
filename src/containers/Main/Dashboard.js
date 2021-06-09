@@ -74,11 +74,15 @@ function Dashboard({ settings, setSetting }) {
       const assetsIn = await methods.call(appContract.methods.getAssetsIn, [
         accountAddress
       ]);
+      console.log('Dashboard assetsIn', assetsIn)
 
       let totalBorrowLimit = new BigNumber(0);
       let totalBorrowBalance = new BigNumber(0);
       
       const assetList = await Promise.all(Object.values(constants.CONTRACT_TOKEN_ADDRESS).map(async (item, index) => {
+        console.log('Dashboard decimal', settings.decimals)
+        console.log('Dashboard markets', settings.markets)
+        console.log('Dashboard item', item)
         if (!settings.decimals[item.id]) {
           return;
         }
@@ -86,6 +90,7 @@ function Dashboard({ settings, setSetting }) {
         let market = settings.markets.find(
           ele => ele.underlyingSymbol === item.symbol
         );
+        console.log('Dashboard market', market)
         if (!market) market = {};
         const asset = {
           key: index,
@@ -113,7 +118,7 @@ function Dashboard({ settings, setSetting }) {
           collateral: false,
           percentOfLimit: '0'
         };
-
+        console.log('Dashboard asset', asset)
         const tokenDecimal = settings.decimals[item.id].token;
         const vBepContract = getVbepContract(item.id);
         
@@ -246,7 +251,17 @@ function Dashboard({ settings, setSetting }) {
         )}
         {settings.selectedAddress && !settings.accountLoading && !settings.wrongNetwork && (
           <Row>
-            <Column xs="12" sm="12" md="5">
+            <Column xs="12" sm="12" md="6">
+              <Row>
+                <Column xs="12">
+                  <WalletBalance />
+                </Column>
+                <Column xs="12">
+                  <Overview />
+                </Column>
+              </Row>
+            </Column>
+            <Column xs="12" sm="12" md="6">
               <Row>
                 <Column xs="12">
                   <CoinInfo />
@@ -256,16 +271,6 @@ function Dashboard({ settings, setSetting }) {
                 </Column>
                 <Column xs="12">
                   <BorrowLimit />
-                </Column>
-                <Column xs="12">
-                  <Overview />
-                </Column>
-              </Row>
-            </Column>
-            <Column xs="12" sm="12" md="7">
-              <Row>
-                <Column xs="12">
-                  <WalletBalance />
                 </Column>
                 <Column xs="12">
                   <Market />

@@ -9,7 +9,7 @@ import { connectAccount } from 'core';
 import { getVaiControllerContract, methods } from 'utilities/ContractService';
 import commaNumber from 'comma-number';
 import feeImg from 'assets/img/fee.png';
-import vaiImg from 'assets/img/coins/vai.svg';
+import vaiImg from 'assets/img/coins/vai.png';
 import { TabSection, TabContent } from 'components/Basic/SupplyModal';
 import { getBigNumber } from 'utilities/common';
 
@@ -106,11 +106,11 @@ function MintTab({ settings }) {
             <div className="flex align-center">
               <img className="asset-img" src={vaiImg} alt="asset" />
               <div className="vai-balance">
-                <span>Available VAI</span>
+                <span>Available BAI</span>
                 <span>Limit</span>
               </div>
             </div>
-            <span>{format(mintableVai.dp(2, 1).toString(10))} VAI</span>
+            <span>{format(mintableVai.dp(2, 1).toString(10))} BAI</span>
           </div>
           <div className="description">
             <div className="flex align-center">
@@ -126,7 +126,7 @@ function MintTab({ settings }) {
                     .dp(4)
                     .toString(10)
                 : 0}{' '}
-              VAI ({feePercent.toString(10)}%)
+              BAI ({feePercent.toString(10)}%)
             </span>
           </div>
         </div>
@@ -140,17 +140,17 @@ function MintTab({ settings }) {
           }
           onClick={handleMintVAI}
         >
-          {isLoading && <Icon type="loading" />} Mint VAI
+          {isLoading && <Icon type="loading" />} Mint BAI
         </Button>
         <div className="description">
-          <span>VAI Balance</span>
+          <span>BAI Balance</span>
           <span>
             {format(
               getBigNumber(settings.userVaiBalance)
                 .dp(2, 1)
                 .toString(10)
             )}{' '}
-            VAI
+            BAI
           </span>
         </div>
       </TabContent>

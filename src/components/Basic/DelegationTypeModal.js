@@ -84,7 +84,7 @@ function DelegationTypeModal({
 
   const handleVoting = dAddress => {
     setIsLoading(true);
-    const tokenContract = getTokenContract('xvs');
+    const tokenContract = getTokenContract('xbid');
     methods
       .send(tokenContract.methods.delegate, [dAddress || address], address)
       .then(() => {

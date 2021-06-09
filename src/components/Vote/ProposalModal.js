@@ -84,7 +84,7 @@ const ModalContent = styled.div`
             border: none;
             height: 55px;
             font-size: 60px;
-            color: var(--color-orange);
+            color: var(--color-blue);
             text-align: center;
             &:focus {
               outline: none;
@@ -96,7 +96,7 @@ const ModalContent = styled.div`
           width: 100%;
           .add-btn {
             height: 40px;
-            background-image: linear-gradient(to right, #f2c265, #f7b44f);
+            background-image: linear-gradient(to right,rgb(28,183,247),rgb(18,153,207));
             border-radius: 10px;
             .MuiButton-label {
               font-size: 16px;
@@ -127,7 +127,7 @@ const ModalContent = styled.div`
       .proposal-btn {
         width: 210px;
         height: 52px;
-        background-image: linear-gradient(to right, #f2c265, #f7b44f);
+        background-image: linear-gradient(to right,rgb(28,183,247),rgb(18,153,207));
         border-radius: 10px;
         .MuiButton-label {
           font-size: 16px;

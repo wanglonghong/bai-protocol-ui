@@ -88,7 +88,7 @@ function Vote({ settings, getProposals, setSetting }) {
 
   const updateBalance = async () => {
     if (settings.selectedAddress && checkIsValidNetwork()) {
-      const xvsTokenContract = getTokenContract('xvs');
+      const xvsTokenContract = getTokenContract('xbid');
       await methods
         .call(xvsTokenContract.methods.getCurrentVotes, [
           settings.selectedAddress
@@ -187,7 +187,7 @@ function Vote({ settings, getProposals, setSetting }) {
 
   const updateDelegate = async () => {
     if (settings.selectedAddress && timeStamp % 3 === 0) {
-      const tokenContract = getTokenContract('xvs');
+      const tokenContract = getTokenContract('xbid');
       methods
         .call(tokenContract.methods.delegates, [settings.selectedAddress])
         .then(res => {

@@ -13,7 +13,7 @@ import {
 } from 'utilities/ContractService';
 import { checkIsValidNetwork } from 'utilities/common';
 import { Card } from 'components/Basic/Card';
-import vaiImg from 'assets/img/coins/vai.svg';
+import vaiImg from 'assets/img/coins/vai.png';
 import xvsImg from 'assets/img/venus_32.png';
 
 const UserInfoWrapper = styled.div`
@@ -75,7 +75,7 @@ function UserInfo({ settings, availableVai, vaiStaked, vaiReward }) {
 
   const updateBalance = useCallback(async () => {
     if (settings.selectedAddress) {
-      const xvsTokenContract = getTokenContract('xvs');
+      const xvsTokenContract = getTokenContract('xbid');
       let temp = await methods.call(xvsTokenContract.methods.balanceOf, [
         settings.selectedAddress
       ]);
@@ -114,25 +114,25 @@ function UserInfo({ settings, availableVai, vaiStaked, vaiReward }) {
     <Card>
       <UserInfoWrapper>
         <div className="total-item">
-          <div className="prop">Available VAI to stake</div>
+          <div className="prop">Available BAI to stake</div>
           <div className="flex align-center value">
             <img src={vaiImg} alt="vai" />
-            {format(availableVai.dp(4, 1).toString(10))} VAI
+            {format(availableVai.dp(4, 1).toString(10))} BAI
           </div>
         </div>
         <div className="total-item">
-          <div className="prop">VAI Staked</div>
+          <div className="prop">BAI Staked</div>
           <div className="flex align-center value">
             <img src={vaiImg} alt="vai" />
-            {format(vaiStaked.dp(4, 1).toString(10))} VAI
+            {format(vaiStaked.dp(4, 1).toString(10))} BAI
           </div>
         </div>
         <div className="total-item">
-          <div className="prop">Available VAI rewards</div>
+          <div className="prop">Available BAI rewards</div>
           <div className="flex align-center just-between value">
             <p>
               <img src={xvsImg} alt="xvs" />
-              {format(vaiReward)} XVS
+              {format(vaiReward)} XBID
             </p>
             <p
               className={`pointer claim-btn ${
@@ -145,11 +145,11 @@ function UserInfo({ settings, availableVai, vaiStaked, vaiReward }) {
           </div>
         </div>
         <div className="total-item">
-          <div className="prop">Venus Balance</div>
+          <div className="prop">Bidao Balance</div>
           <div className="flex align-center just-between value">
             <p>
               <img src={xvsImg} alt="xvs" />
-              {format(balance)} XVS
+              {format(balance)} XBID
             </p>
           </div>
         </div>

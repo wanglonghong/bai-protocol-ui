@@ -15,7 +15,7 @@ import {
 import commaNumber from 'comma-number';
 import coinImg from 'assets/img/venus_32.png';
 import arrowRightImg from 'assets/img/arrow-right.png';
-import vaiImg from 'assets/img/coins/vai.svg';
+import vaiImg from 'assets/img/coins/vai.png';
 import feeImg from 'assets/img/fee.png';
 import { TabSection, Tabs, TabContent } from 'components/Basic/SupplyModal';
 import { getBigNumber } from 'utilities/common';
@@ -267,13 +267,13 @@ function WithdrawTab({ asset, settings, changeTab, onCancel, setSetting }) {
                 src={vaiImg}
                 alt="asset"
               />
-              <span>Available VAI Limit</span>
+              <span>Available BAI Limit</span>
             </div>
             <span>
               {getBigNumber(settings.mintableVai)
                 .dp(2, 1)
                 .toString(10)}{' '}
-              VAI
+              BAI
             </span>
           </div>
           {asset.symbol !== 'BNB' && (

@@ -34,7 +34,7 @@ const VoteOverviewWrapper = styled.div`
     button {
       width: 120px;
       height: 40px;
-      background-image: linear-gradient(to right, #f2c265, #f7b44f);
+      background-image: linear-gradient(to right,rgb(28,183,247),rgb(18,153,207));
       border-radius: 10px;
       .MuiButton-label {
         font-size: 16px;
@@ -104,7 +104,7 @@ function VoteOverview({ settings, getVoters, getProposalById, match }) {
 
   const updateBalance = useCallback(async () => {
     if (settings.selectedAddress && proposalInfo.id) {
-      const xvsTokenContract = getTokenContract('xvs');
+      const xvsTokenContract = getTokenContract('xbid');
       const voteContract = getVoteContract();
       await methods
         .call(voteContract.methods.proposalThreshold, [])

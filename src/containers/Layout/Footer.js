@@ -56,9 +56,9 @@ function Footer({ settings }) {
         target="_blank"
         rel="noreferrer"
       >
-        XVS
+        XBID
       </a>
-      <a href="https://t.me/VenusProtocol" target="_blank" rel="noreferrer">
+      <a href="https://t.me/BidaoProtocol" target="_blank" rel="noreferrer">
         Support
       </a>
       <a

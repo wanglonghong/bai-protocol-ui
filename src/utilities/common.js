@@ -62,18 +62,23 @@ export const addToken = async (asset = 'vai', decimal, type) => {
   let tokenImage = '';
   if (asset === 'vai') {
     tokenAddress = constants.CONTRACT_VAI_TOKEN_ADDRESS;
-    tokenSymbol = 'VAI';
+    tokenSymbol = 'BAI';
     tokenDecimals = 18;
-    tokenImage = `${window.location.origin}/coins/vai.svg`;
+    tokenImage = `${window.location.origin}/coins/vai.png`;
   } else {
     tokenAddress =
       type === 'token'
         ? constants.CONTRACT_TOKEN_ADDRESS[asset].address
         : constants.CONTRACT_VBEP_ADDRESS[asset].address;
-    tokenSymbol =
-      type === 'token'
-        ? asset.toUpperCase()
-        : `v${(asset === 'btcb' ? 'btc' : asset).toUpperCase()}`;
+    tokenSymbol =    
+        type === 'token'
+            ? constants.CONTRACT_TOKEN_ADDRESS[asset].symbol
+            : constants.CONTRACT_VBEP_ADDRESS[asset].symbol;
+    // tokenSymbol =
+    //   type === 'token'
+    //     ? asset.toUpperCase()
+    //     : `v${(asset === 'btcb' ? 'btc' : asset).toUpperCase()}`;
+    tokenSymbol = tokenSymbol.toUpperCase()
     tokenDecimals = decimal || (type === 'token' ? 18 : 8);
     tokenImage = `${window.location.origin}/coins/${
       type === 'token' ? asset : `v${asset === 'btcb' ? 'btc' : asset}`

@@ -57,7 +57,7 @@ function Vault({ settings }) {
 
   const updateTotalInfo = async () => {
     const compContract = getComptrollerContract();
-    const xvsTokenContract = getTokenContract('xvs');
+    const xvsTokenContract = getTokenContract('xbid');
     const tokenContract = getVaiTokenContract();
     const vaultContract = getVaiVaultContract();
 

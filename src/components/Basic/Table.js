@@ -56,7 +56,7 @@ const MarketTableWrapper = styled.div`
         /* Handle */
         &::-webkit-scrollbar-thumb {
           -webkit-border-radius: 3px;
-          background-color: var(--color-primary);
+          background-color: var(--color-blue);
         }
 
         /* Handle on hover */

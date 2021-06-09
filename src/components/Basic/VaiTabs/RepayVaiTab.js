@@ -13,7 +13,7 @@ import {
 } from 'utilities/ContractService';
 import commaNumber from 'comma-number';
 import * as constants from 'utilities/constants';
-import vaiImg from 'assets/img/coins/vai.svg';
+import vaiImg from 'assets/img/coins/vai.png';
 import { TabSection, TabContent } from 'components/Basic/BorrowModal';
 import { getBigNumber } from 'utilities/common';
 
@@ -77,7 +77,7 @@ function RepayVaiTab({ settings }) {
       setIsLoading(true);
       methods
         .send(
-          appContract.methods.repayBAI,
+          appContract.methods.repayVAI,
           [
             amount.times(new BigNumber(10).pow(18)).dp(0).toString(10)
           ],
@@ -121,7 +121,7 @@ function RepayVaiTab({ settings }) {
           <>
             <img src={vaiImg} alt="asset" />
             <p className="center warning-label">
-              To repay VAI to the Venus Protocol, you need to approve it first.
+              To repay BAI to the Bidao Protocol, you need to approve it first.
             </p>
           </>
         )}
@@ -132,11 +132,11 @@ function RepayVaiTab({ settings }) {
             <div className="flex align-center">
               <img className="asset-img" src={vaiImg} alt="asset" />
               <div className="vai-balance">
-                <span>Repay VAI</span>
+                <span>Repay BAI</span>
                 <span>Balance</span>
               </div>
             </div>
-            <span>{format(userVaiMinted.dp(2, 1).toString(10))} VAI</span>
+            <span>{format(userVaiMinted.dp(2, 1).toString(10))} BAI</span>
           </div>
         </div>
         {(vaiBalance.isZero() || amount.isGreaterThan(vaiBalance)) && (
@@ -164,12 +164,12 @@ function RepayVaiTab({ settings }) {
             }
             onClick={handleRepayVAI}
           >
-            {isLoading && <Icon type="loading" />} Repay VAI
+            {isLoading && <Icon type="loading" />} Repay BAI
           </Button>
         )}
         <div className="description">
-          <span>VAI Balance</span>
-          <span>{format(vaiBalance.dp(2, 1).toString(10))} VAI</span>
+          <span>BAI Balance</span>
+          <span>{format(vaiBalance.dp(2, 1).toString(10))} BAI</span>
         </div>
       </TabContent>
     </TabSection>

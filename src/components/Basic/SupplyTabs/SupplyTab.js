@@ -16,7 +16,7 @@ import commaNumber from 'comma-number';
 import { sendSupply } from 'utilities/BnbContract';
 import coinImg from 'assets/img/venus_32.png';
 import arrowRightImg from 'assets/img/arrow-right.png';
-import vaiImg from 'assets/img/coins/vai.svg';
+import vaiImg from 'assets/img/coins/vai.png';
 import { TabSection, Tabs, TabContent } from 'components/Basic/SupplyModal';
 import { getBigNumber } from 'utilities/common';
 
@@ -247,7 +247,7 @@ function SupplyTab({ asset, settings, changeTab, onCancel, setSetting }) {
           <>
             <img src={asset.img} alt="asset" />
             <p className="center warning-label">
-              To Supply {asset.name} to the Venus Protocol, you need to approve
+              To Supply {asset.name} to the Bidao Protocol, you need to approve
               it first.
             </p>
           </>
@@ -313,13 +313,13 @@ function SupplyTab({ asset, settings, changeTab, onCancel, setSetting }) {
                 src={vaiImg}
                 alt="asset"
               />
-              <span>Available VAI Limit</span>
+              <span>Available BAI Limit</span>
             </div>
             <span>
               {getBigNumber(settings.mintableVai)
                 .dp(2, 1)
                 .toString(10)}{' '}
-              VAI
+              BAI
             </span>
           </div>
         </div>

@@ -112,12 +112,12 @@ body {
     /* Handle */
     &::-webkit-scrollbar-thumb {
         -webkit-border-radius: 3px;
-        background-color: var(--color-primary);
+        background-color: var(--color-blue);
     }
 
     /* Handle on hover */
     &::-webkit-scrollbar-thumb:hover {
-        background: #e53d52;
+        background: #1cb7e4;
     }
 
     ::-webkit-scrollbar-corner {

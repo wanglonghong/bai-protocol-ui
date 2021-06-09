@@ -15,7 +15,7 @@ import { sendRepay } from 'utilities/BnbContract';
 import commaNumber from 'comma-number';
 import arrowRightImg from 'assets/img/arrow-right.png';
 import coinImg from 'assets/img/venus_32.png';
-import vaiImg from 'assets/img/coins/vai.svg';
+import vaiImg from 'assets/img/coins/vai.png';
 import { Icon, Progress } from 'antd';
 import { TabSection, Tabs, TabContent } from 'components/Basic/BorrowModal';
 import { getBigNumber } from 'utilities/common';
@@ -213,7 +213,7 @@ function RepayBorrowTab({ asset, settings, changeTab, onCancel, setSetting }) {
           <>
             <img src={asset.img} alt="asset" />
             <p className="center warning-label">
-              To Repay {asset.name} to the Venus Protocol, you need to enable it
+              To Repay {asset.name} to the Bidao Protocol, you need to enable it
               first.
             </p>
           </>
@@ -279,13 +279,13 @@ function RepayBorrowTab({ asset, settings, changeTab, onCancel, setSetting }) {
                 src={vaiImg}
                 alt="asset"
               />
-              <span>Repay VAI Balance</span>
+              <span>Repay BAI Balance</span>
             </div>
             <span>
               {getBigNumber(settings.userVaiMinted)
                 .dp(2, 1)
                 .toString(10)}{' '}
-              VAI
+              BAI
             </span>
           </div>
         </div>

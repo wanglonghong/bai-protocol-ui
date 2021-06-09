@@ -79,6 +79,7 @@ const Market = ({ settings, setSetting }) => {
       };
       tempArr.push(temp);
     });
+    console.log('build markets',settings.assetList, tempArr)
 
     const tempSuppliedData = [];
     const tempNonSuppliableData = [];
@@ -147,7 +148,7 @@ const Market = ({ settings, setSetting }) => {
               setCurrentTab('vai');
             }}
           >
-            Mint / Repay VAI
+            Mint / Repay BAI
           </div>
         </Tabs>
         <TabContent>

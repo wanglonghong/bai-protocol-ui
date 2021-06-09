@@ -49,8 +49,8 @@ export const INVALID_ADDRESS = 'Wallet address is not valid';
 
 export const CONTRACT_XVS_TOKEN_ADDRESS =
   process.env.REACT_APP_ENV === 'dev'
-    ? contracts.TEST.TOKEN.xvs
-    : contracts.MAIN.TOKEN.xvs;
+    ? contracts.TEST.TOKEN.xbid
+    : contracts.MAIN.TOKEN.xbid;
 
 export const CONTRACT_VAI_TOKEN_ADDRESS =
   process.env.REACT_APP_ENV === 'dev'
@@ -80,10 +80,10 @@ export const CONTRACT_VAI_CONTROLLER_ABI =
 export const CONTRACT_TOKEN_ADDRESS =
   process.env.REACT_APP_ENV === 'dev'
     ? {
-        sxp: {
-          id: 'sxp',
+        xdao: {
+          id: 'xdao',
           symbol: 'XDAO',
-          address: contracts.TEST.TOKEN.sxp,
+          address: contracts.TEST.TOKEN.xdao,
           asset: sxp,
           vasset: vsxp
         },
@@ -93,10 +93,10 @@ export const CONTRACT_TOKEN_ADDRESS =
           asset: bnb,
           vasset: vbnb
         },
-        xvs: {
-          id: 'xvs',
+        xbid: {
+          id: 'xbid',
           symbol: 'XBID',
-          address: contracts.TEST.TOKEN.xvs,
+          address: contracts.TEST.TOKEN.xbid,
           asset: xvs,
           vasset: vxvs
         },
@@ -248,20 +248,20 @@ export const CONTRACT_DOGE_TOKEN_ABI =
 export const CONTRACT_VBEP_ADDRESS =
   process.env.REACT_APP_ENV === 'dev'
   ? {
-    sxp: {
-      id: 'sxp',
+    xdao: {
+      id: 'xdao',
       symbol: 'bXDAO',
-      address: contracts.TEST.VBEP.sxp,
+      address: contracts.TEST.VBEP.xdao,
     },
     bnb: {
       id: 'bnb',
       symbol: 'bBNB',
       address: contracts.TEST.VBEP.bnb,
     },
-    xvs: {
-      id: 'xvs',
+    xbid: {
+      id: 'xbid',
       symbol: 'bXBID',
-      address: contracts.TEST.VBEP.xvs
+      address: contracts.TEST.VBEP.xbid
     },
     busd: {
       id: 'busd',

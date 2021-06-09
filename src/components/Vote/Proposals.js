@@ -21,7 +21,7 @@ import { Card } from 'components/Basic/Card';
 const ProposalsWrapper = styled.div`
   width: 100%;
   border-radius: 25px;
-  background-color: #181c3a;
+  background-color: var(--color-bg-primary);
   padding: 20px 30px;
 
   .proposal-head {
@@ -35,7 +35,7 @@ const ProposalsWrapper = styled.div`
       width: 150px;
       height: 40px;
       border-radius: 5px;
-      background-image: linear-gradient(to right, #f2c265, #f7b44f);
+      background-image: linear-gradient(to right,rgb(28,183,247),rgb(18,153,207));
       .MuiButton-label {
         font-size: 14px;
         font-weight: 500;
@@ -163,7 +163,7 @@ function Proposals({
       (delegateAddress === '' ||
         delegateAddress === '0x0000000000000000000000000000000000000000')
     ) {
-      const tokenContract = getTokenContract('xvs');
+      const tokenContract = getTokenContract('xbid');
       methods
         .call(tokenContract.methods.delegates, [address])
         .then(res => {
@@ -190,7 +190,7 @@ function Proposals({
   const handleShowProposalModal = () => {
     if (+votingWeight < +proposalThreshold) {
       toast.error({
-        title: `You can't create proposal. Your voting power should be ${proposalThreshold} XVS at least`
+        title: `You can't create proposal. Your voting power should be ${proposalThreshold} XBID at least`
       });
       return;
     }

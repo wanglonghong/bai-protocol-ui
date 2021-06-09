@@ -19,7 +19,7 @@ const CardWrapper = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 25px;
-  background-color: #181c3a;
+  background-color: var(--color-bg-primary);
   padding: 35px;
 
   .label {
@@ -214,13 +214,13 @@ function WalletBalance({ settings, setSetting }) {
               />
               <Label size="14" primary className="toggel-label">
                 {withXVS ? (
-                  '🔥 APY with XVS'
+                  '🔥 APY with XBID'
                 ) : (
                   <div>
                     <span className="emoji" role="img" aria-label="information">
                       🔥
                     </span>
-                    APY without XVS
+                    APY without XBID
                   </div>
                 )}
               </Label>

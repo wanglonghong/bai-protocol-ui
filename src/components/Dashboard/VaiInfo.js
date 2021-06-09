@@ -6,7 +6,7 @@ import { compose } from 'recompose';
 import { connectAccount } from 'core';
 import commaNumber from 'comma-number';
 import * as constants from 'utilities/constants';
-import coinImg from 'assets/img/coins/vai.svg';
+import coinImg from 'assets/img/coins/vai.png';
 import { Card } from 'components/Basic/Card';
 import { addToken, getBigNumber } from 'utilities/common';
 
@@ -81,7 +81,7 @@ function VaiInfo({ settings }) {
                 .dp(2, 1)
                 .toString(10)
             )}{' '}
-            VAI{' '}
+            BAI{' '}
           </p>
           {window.ethereum && (
             <Icon

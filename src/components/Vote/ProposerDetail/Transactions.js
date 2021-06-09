@@ -110,8 +110,8 @@ function Transactions({ address, transactions }) {
         tempData.push({
           action:
             tx.to.toLowerCase() === address.toLowerCase()
-              ? 'Received XVS'
-              : 'Sent XVS',
+              ? 'Received XBID'
+              : 'Sent XBID',
           age: getDate(tx.blockTimestamp),
           result: format(
             new BigNumber(tx.amount)

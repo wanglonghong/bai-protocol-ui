@@ -49,19 +49,19 @@ function TotalInfo({ settings, emission, pendingRewards }) {
       <TotalInfoWrapper>
         <div className="total-item">
           <div className="prop">Total emission per day</div>
-          <div className="value">{format(emission)} XVS</div>
+          <div className="value">{format(emission)} XBID</div>
         </div>
         <div className="total-item">
-          <div className="prop">Total VAI Staked</div>
-          <div className="value">{settings.vaultVaiStaked ? format(new BigNumber(settings.vaultVaiStaked).dp(4, 1).toString(10)) : 0} VAI</div>
+          <div className="prop">Total BAI Staked</div>
+          <div className="value">{settings.vaultVaiStaked ? format(new BigNumber(settings.vaultVaiStaked).dp(4, 1).toString(10)) : 0} BAI</div>
         </div>
         <div className="total-item">
-          <div className="prop">VAI Staking APY</div>
+          <div className="prop">BAI Staking APY</div>
           <div className="value">{settings.vaiAPY}%</div>
         </div>
         <div className="total-item">
-          <div className="prop">VAI Vault Reward Pool</div>
-          <div className="value">{format(pendingRewards)} XVS</div>
+          <div className="prop">BAI Vault Reward Pool</div>
+          <div className="value">{format(pendingRewards)} XBID</div>
         </div>
       </TotalInfoWrapper>
     </Card>
