@@ -107,41 +107,34 @@ export const CONTRACT_TOKEN_ADDRESS =
           asset: busd,
           vasset: vbusd
         },
-        // btcb: {
-        //   id: 'btcb',
-        //   symbol: 'BTCB',
-        //   address: contracts.TEST.TOKEN.btcb,
-        //   asset: btc,
-        //   vasset: vbtc
-        // },
-        // eth: {
-        //   id: 'eth',
-        //   symbol: 'ETH',
-        //   address: contracts.TEST.TOKEN.eth,
-        //   asset: eth,
-        //   vasset: veth
-        // },
-        // ltc: {
-        //   id: 'ltc',
-        //   symbol: 'LTC',
-        //   address: contracts.TEST.TOKEN.ltc,
-        //   asset: ltc,
-        //   vasset: vltc
-        // },
-        // xrp: {
-        //   id: 'xrp',
-        //   symbol: 'XRP',
-        //   address: contracts.TEST.TOKEN.xrp,
-        //   asset: xrp,
-        //   vasset: vxrp
-        // },
-        // ada: {
-        //   id: 'ada',
-        //   symbol: 'ADA',
-        //   address: contracts.TEST.TOKEN.ada,
-        //   asset: ada,
-        //   vasset: vada
-        // },
+        btcb: {
+          id: 'btcb',
+          symbol: 'BTCB',
+          address: contracts.TEST.TOKEN.btcb,
+          asset: btc,
+          vasset: vbtc
+        },
+        eth: {
+          id: 'eth',
+          symbol: 'ETH',
+          address: contracts.TEST.TOKEN.eth,
+          asset: eth,
+          vasset: veth
+        },
+        xrp: {
+          id: 'xrp',
+          symbol: 'XRP',
+          address: contracts.TEST.TOKEN.xrp,
+          asset: xrp,
+          vasset: vxrp
+        },
+        ada: {
+          id: 'ada',
+          symbol: 'ADA',
+          address: contracts.TEST.TOKEN.ada,
+          asset: ada,
+          vasset: vada
+        },
       }
     : {
         sxp: {
@@ -268,21 +261,26 @@ export const CONTRACT_VBEP_ADDRESS =
       symbol: 'bBUSD',
       address: contracts.TEST.VBEP.busd
     },
-    // btcb: {
-    //   id: 'btcb',
-    //   symbol: 'vBTC',
-    //   address: contracts.TEST.VBEP.btcb,
-    // },
-    // eth: {
-    //   id: 'eth',
-    //   symbol: 'vETH',
-    //   address: contracts.TEST.VBEP.eth,
-    // },
-    // xrp: {
-    //   id: 'xrp',
-    //   symbol: 'vXRP',
-    //   address: contracts.TEST.VBEP.xrp,
-    // },
+    btcb: {
+      id: 'btcb',
+      symbol: 'bBTC',
+      address: contracts.TEST.VBEP.btcb,
+    },
+    eth: {
+      id: 'eth',
+      symbol: 'bETH',
+      address: contracts.TEST.VBEP.eth,
+    },
+    xrp: {
+      id: 'xrp',
+      symbol: 'bXRP',
+      address: contracts.TEST.VBEP.xrp,
+    },
+    ada: {
+      id: 'ada',
+      symbol: 'bADA',
+      address: contracts.TEST.VBEP.ada,
+    },
   }
 : {
     sxp: {
