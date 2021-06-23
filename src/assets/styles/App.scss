@@ -21,6 +21,8 @@ body {
     &::-webkit-scrollbar-thumb:hover {
         background: #555; 
     }
+
+    background-color: var(--color-bg-main);
 }
 .switch-wrapper {
     position: relative;

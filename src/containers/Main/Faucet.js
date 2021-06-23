@@ -13,6 +13,8 @@ import LoadingSpinner from 'components/Basic/LoadingSpinner';
 import toast from 'components/Basic/Toast';
 import * as constants from 'utilities/constants';
 import { Row, Column } from 'components/Basic/Style';
+import { getFaucetContract, methods } from 'utilities/ContractService';
+import BigNumber from 'bignumber.js';
 
 const FaucetWrapper = styled.div`
   width: 100%;
@@ -91,157 +93,192 @@ const ButtonWrapper = styled.div`
   }
 `;
 
-function Faucet({ form, getFromFaucet }) {
-  const { getFieldDecorator } = form;
+function Faucet({ settings }) {
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleMenuClick = (e, symbol) => {
-    form.validateFields((err, values) => {
-      if (!err) {
-        setIsLoading(true);
-        promisify(getFromFaucet, {
-          address: values.address,
-          asset: symbol,
-          amountType: e.key
-        })
-          .then(() => {
-            setIsLoading(false);
-            let fromAddress;
-            if (symbol === 'xbid') {
-              fromAddress = constants.CONTRACT_XVS_TOKEN_ADDRESS;
-            } else if (symbol === 'bnb') {
-              fromAddress = constants.CONTRACT_XVS_TOKEN_ADDRESS;
-            } else {
-              fromAddress = constants.CONTRACT_TOKEN_ADDRESS[symbol].address;
-            }
-            toast.success({
-              title: `Funding request for ${fromAddress} into ${values.address}`
-            });
-          })
-          .catch(error => {
-            if (error.data && error.data.message) {
-              toast.error({
-                title: error.data.message
-              });
-            }
-            setIsLoading(false);
-          });
-      }
-    });
+  const handleMenuClick = async (e, symbol) => {
+    setIsLoading(true);
+    let amount =  new BigNumber(e.key)
+            .times(1e18)
+            .integerValue()
+            .toString(10);
+
+    let fromAddress;
+    if (symbol === 'xbid') {
+      fromAddress = constants.CONTRACT_XVS_TOKEN_ADDRESS;
+    } else if (symbol === 'bnb') {
+      fromAddress = constants.CONTRACT_XVS_TOKEN_ADDRESS;
+    } else {
+      fromAddress = constants.CONTRACT_TOKEN_ADDRESS[symbol].address;
+    }
+
+    const faucetContract = getFaucetContract();
+    const remainSeconds = await methods.call(
+      faucetContract.methods.remainSeconds,
+      [settings.selectedAddress, fromAddress]
+    );
+
+    if(remainSeconds > 0) {
+        const remainTime = new Date(remainSeconds * 1000).toISOString().substr(11, 8);
+        toast.error({
+          title: `${remainTime} left until next allowance`
+        });
+        setIsLoading(false);
+        return;
+    } else {
+      methods
+      .send(
+        faucetContract.methods.claim,
+        [fromAddress, amount],
+        settings.selectedAddress
+      )
+      .then(() => {
+        setIsLoading(false);
+        toast.success({
+          title: `Funding request into ${settings.selectedAddress}`
+        });
+      })
+      .catch(() => {
+        setIsLoading(false);
+        toast.error({
+          title: `Funding request into ${settings.selectedAddress}`
+        });
+      });
+    }
+    
+  
+    // form.validateFields((err, values) => {
+    //   if (!err) {
+    //     setIsLoading(true);
+    //     promisify(getFromFaucet, {
+    //       address: values.address,
+    //       asset: symbol,
+    //       amountType: e.key
+    //     })
+    //       .then(() => {
+    //         setIsLoading(false);
+    //         let fromAddress;
+    //         if (symbol === 'xbid') {
+    //           fromAddress = constants.CONTRACT_XVS_TOKEN_ADDRESS;
+    //         } else if (symbol === 'bnb') {
+    //           fromAddress = constants.CONTRACT_XVS_TOKEN_ADDRESS;
+    //         } else {
+    //           fromAddress = constants.CONTRACT_TOKEN_ADDRESS[symbol].address;
+    //         }
+    //         toast.success({
+    //           title: `Funding request for ${fromAddress} into ${values.address}`
+    //         });
+    //       })
+    //       .catch(error => {
+    //         if (error.data && error.data.message) {
+    //           toast.error({
+    //             title: error.data.message
+    //           });
+    //         }
+    //         setIsLoading(false);
+    //       });
+    //   }
+    // });
   };
 
-  const usdcMenu = (
-    <Menu onClick={e => handleMenuClick(e, 'usdc')}>
-      <Menu.Item key="low">1000 USDCs</Menu.Item>
-      <Menu.Item key="medium">2000 USDCs</Menu.Item>
-      <Menu.Item key="high">5000 USDCs</Menu.Item>
-    </Menu>
-  );
-
-  const usdtMenu = (
-    <Menu onClick={e => handleMenuClick(e, 'usdt')}>
-      <Menu.Item key="low">1000 USDTs</Menu.Item>
-      <Menu.Item key="medium">2000 USDTs</Menu.Item>
-      <Menu.Item key="high">5000 USDTs</Menu.Item>
-    </Menu>
-  );
+  const handleBNBMenuClick = () => {
+    window.open('https://testnet.binance.org/faucet-smart', '_blank')
+  }
 
   const busdMenu = (
     <Menu onClick={e => handleMenuClick(e, 'busd')}>
-      <Menu.Item key="low">1000 BUSDs</Menu.Item>
-      <Menu.Item key="medium">2000 BUSDs</Menu.Item>
-      <Menu.Item key="high">5000 BUSDs</Menu.Item>
+      <Menu.Item key="20">20 BUSDs</Menu.Item>
+      <Menu.Item key="50">50 BUSDs</Menu.Item>
+      <Menu.Item key="100">100 BUSDs</Menu.Item>
     </Menu>
   );
 
   const bnbMenu = (
     <Menu onClick={e => handleMenuClick(e, 'bnb')}>
-      <Menu.Item key="low">1 BNB</Menu.Item>
-      <Menu.Item key="medium">2.5 BNBs</Menu.Item>
-      <Menu.Item key="high">5 BNBs</Menu.Item>
+      <Menu.Item key="1">1 BNB</Menu.Item>
+      <Menu.Item key="2.5">2.5 BNBs</Menu.Item>
+      <Menu.Item key="5">5 BNBs</Menu.Item>
     </Menu>
   );
 
   const sxpMenu = (
-    <Menu onClick={e => handleMenuClick(e, 'sxp')}>
-      <Menu.Item key="low">100 XDAOs</Menu.Item>
-      <Menu.Item key="medium">200 XDAOs</Menu.Item>
-      <Menu.Item key="high">500 XDAOs</Menu.Item>
+    <Menu onClick={e => handleMenuClick(e, 'xdao')}>
+      <Menu.Item key="20">20 XDAOs</Menu.Item>
+      <Menu.Item key="50">50 XDAOs</Menu.Item>
+      <Menu.Item key="100">100 XDAOs</Menu.Item>
     </Menu>
   );
 
   const xvsMenu = (
-    <Menu onClick={e => handleMenuClick(e, 'xvs')}>
-      <Menu.Item key="low">100 XBIDs</Menu.Item>
-      <Menu.Item key="medium">200 XBIDs</Menu.Item>
-      <Menu.Item key="high">500 XBIDs</Menu.Item>
+    <Menu onClick={e => handleMenuClick(e, 'xbid')}>
+      <Menu.Item key="20">20 XBIDs</Menu.Item>
+      <Menu.Item key="50">50 XBIDs</Menu.Item>
+      <Menu.Item key="100">100 XBIDs</Menu.Item>
     </Menu>
   );
 
   const btcbMenu = (
     <Menu onClick={e => handleMenuClick(e, 'btcb')}>
-      <Menu.Item key="low">100 BTCBs</Menu.Item>
-      <Menu.Item key="medium">200 BTCBs</Menu.Item>
-      <Menu.Item key="high">500 BTCBs</Menu.Item>
+      <Menu.Item key="20">20 BTCBs</Menu.Item>
+      <Menu.Item key="50">50 BTCBs</Menu.Item>
+      <Menu.Item key="100">100 BTCBs</Menu.Item>
     </Menu>
   );
 
   const ethMenu = (
     <Menu onClick={e => handleMenuClick(e, 'eth')}>
-      <Menu.Item key="low">100 ETHs</Menu.Item>
-      <Menu.Item key="medium">200 ETHs</Menu.Item>
-      <Menu.Item key="high">500 ETHs</Menu.Item>
+      <Menu.Item key="20">20 ETHs</Menu.Item>
+      <Menu.Item key="50">50 ETHs</Menu.Item>
+      <Menu.Item key="100">100 ETHs</Menu.Item>
     </Menu>
   );
 
-  const ltcMenu = (
-    <Menu onClick={e => handleMenuClick(e, 'ltc')}>
-      <Menu.Item key="low">100 LTCs</Menu.Item>
-      <Menu.Item key="medium">200 LTCs</Menu.Item>
-      <Menu.Item key="high">500 LTCs</Menu.Item>
+  const adaMenu = (
+    <Menu onClick={e => handleMenuClick(e, 'ada')}>
+      <Menu.Item key="20">20 ADAs</Menu.Item>
+      <Menu.Item key="50">50 ADAs</Menu.Item>
+      <Menu.Item key="100">100 ADAs</Menu.Item>
     </Menu>
   );
 
   const xrpMenu = (
     <Menu onClick={e => handleMenuClick(e, 'xrp')}>
-      <Menu.Item key="low">100 XRPs</Menu.Item>
-      <Menu.Item key="medium">200 XRPs</Menu.Item>
-      <Menu.Item key="high">500 XRPs</Menu.Item>
+      <Menu.Item key="20">20 XRPs</Menu.Item>
+      <Menu.Item key="50">50 XRPs</Menu.Item>
+      <Menu.Item key="100">100 XRPs</Menu.Item>
     </Menu>
   );
+  
 
   return (
     <MainLayout isHeader={false}>
       <div className="flex just-center align-center">
         <FaucetWrapper className="flex flex-column align-center just-center">
-          <p className="header">Bidao Binance Smart Chain Faucet</p>
-          <Form className="forgot-pwd-form">
-            <Form.Item>
-              {getFieldDecorator('address', {
-                rules: [
-                  {
-                    required: true,
-                    message: 'Address is required!'
-                  }
-                ]
-              })(
-                <Input placeholder="Input your Binance Smart Chain address..." />
-              )}
-            </Form.Item>
-            {isLoading ? (
-              <div className="flex flex-column">
+          <p className="header">Bidao  Faucet</p>
+          <div className="forgot-pwd-form">
+
+            
+            {!settings.selectedAddress || isLoading ? (
+              <div className="flex flex-column" style={{margin: '50px'}}>
                 <LoadingSpinner size={60} />
               </div>
             ) : (
               <>
                 <Row>
+                    <Column xs="12">
+                      <div className="flex flex-column align-center just-center bottom">
+                        <p className="description">
+                          {settings.selectedAddress}
+                        </p>
+                      </div>
+                      </Column>
+                </Row>  
+                <Row>
                   <Column xs="6" sm="4">
                     <ButtonWrapper>
-                      <Dropdown overlay={bnbMenu} placement="bottomCenter">
-                        <Button className="fill-btn next-btn button">
-                          Give Me BNB
-                        </Button>
-                      </Dropdown>
+                      <Button className="fill-btn next-btn button" onClick={handleBNBMenuClick}>
+                        Give Me BNB
+                      </Button>
                     </ButtonWrapper>
                   </Column>
                   <Column xs="6" sm="4">
@@ -273,24 +310,6 @@ function Faucet({ form, getFromFaucet }) {
                   </Column>
                   <Column xs="6" sm="4">
                     <ButtonWrapper>
-                      <Dropdown overlay={usdtMenu} placement="bottomCenter">
-                        <Button className="fill-btn next-btn button">
-                          Give Me USDT
-                        </Button>
-                      </Dropdown>
-                    </ButtonWrapper>
-                  </Column>
-                  <Column xs="6" sm="4">
-                    <ButtonWrapper>
-                      <Dropdown overlay={usdcMenu} placement="bottomCenter">
-                        <Button className="fill-btn next-btn button">
-                          Give Me USDC
-                        </Button>
-                      </Dropdown>
-                    </ButtonWrapper>
-                  </Column>
-                  <Column xs="6" sm="4">
-                    <ButtonWrapper>
                       <Dropdown overlay={btcbMenu} placement="bottomCenter">
                         <Button className="fill-btn next-btn button">
                           Give Me BTCB
@@ -309,21 +328,18 @@ function Faucet({ form, getFromFaucet }) {
                   </Column>
                   <Column xs="6" sm="4">
                     <ButtonWrapper>
-                      <Dropdown overlay={ltcMenu} placement="bottomCenter">
+                      <Dropdown overlay={xrpMenu} placement="bottomCenter">
                         <Button className="fill-btn next-btn button">
-                          Give Me LTC
+                          Give Me XRP
                         </Button>
                       </Dropdown>
                     </ButtonWrapper>
                   </Column>
-                  <Column xs="6" sm="4" className="empty-menu">
-                    <ButtonWrapper />
-                  </Column>
                   <Column xs="6" sm="4">
                     <ButtonWrapper>
-                      <Dropdown overlay={xrpMenu} placement="bottomCenter">
+                      <Dropdown overlay={adaMenu} placement="bottomCenter">
                         <Button className="fill-btn next-btn button">
-                          Give Me XRP
+                          Give Me ADA
                         </Button>
                       </Dropdown>
                     </ButtonWrapper>
@@ -334,12 +350,12 @@ function Faucet({ form, getFromFaucet }) {
                 </Row>
               </>
             )}
-          </Form>
+          </div>
           <div className="flex flex-column align-center just-center bottom">
             <p className="title">How does this work?</p>
             <p className="description">
               <a
-                href={`${process.env.REACT_APP_BSC_EXPLORER}/address/${constants.CONTRACT_TOKEN_ADDRESS.sxp.address}`}
+                href={`${process.env.REACT_APP_BSC_EXPLORER}/address/${constants.CONTRACT_TOKEN_ADDRESS.xdao.address}`}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -360,22 +376,6 @@ function Faucet({ form, getFromFaucet }) {
                 rel="noreferrer"
               >
                 BUSD
-              </a>
-              {`, `}
-              <a
-                href={`${process.env.REACT_APP_BSC_EXPLORER}/address/${constants.CONTRACT_TOKEN_ADDRESS.usdc.address}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                USDC
-              </a>
-              {`, `}
-              <a
-                href={`${process.env.REACT_APP_BSC_EXPLORER}/address/${constants.CONTRACT_TOKEN_ADDRESS.usdt.address}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                USDT
               </a>
               {`, `}
               <a
@@ -403,19 +403,19 @@ function Faucet({ form, getFromFaucet }) {
               </a>
               {`, `}
               <a
-                href={`${process.env.REACT_APP_BSC_EXPLORER}/address/${constants.CONTRACT_TOKEN_ADDRESS.ltc.address}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                LTC
-              </a>
-              {`, `}
-              <a
                 href={`${process.env.REACT_APP_BSC_EXPLORER}/address/${constants.CONTRACT_TOKEN_ADDRESS.xrp.address}`}
                 target="_blank"
                 rel="noreferrer"
               >
                 XRP
+              </a>
+              {`, `}
+              <a
+                href={`${process.env.REACT_APP_BSC_EXPLORER}/address/${constants.CONTRACT_TOKEN_ADDRESS.ada.address}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                ADA
               </a>
               {` are issued as BEP20 token.`}
             </p>
@@ -437,23 +437,22 @@ function Faucet({ form, getFromFaucet }) {
 }
 
 Faucet.propTypes = {
-  form: PropTypes.object.isRequired,
-  getFromFaucet: PropTypes.func.isRequired
+  settings: PropTypes.object
 };
 
-const mapDispatchToProps = dispatch => {
-  const { getFromFaucet } = accountActionCreators;
+Faucet.defaultProps = {
+  settings: {}
+};
 
-  return bindActionCreators(
-    {
-      getFromFaucet
-    },
-    dispatch
-  );
+const mapStateToProps = ({ account }) => ({
+  settings: account.setting
+});
+
+const mapDispatchToProps = dispatch => {
+  
 };
 
 export default compose(
   withRouter,
-  Form.create({ name: 'faucet-form' }),
-  connectAccount(undefined, mapDispatchToProps)
+  connectAccount(mapStateToProps, mapDispatchToProps)
 )(Faucet);

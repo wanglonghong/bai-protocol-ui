@@ -124,6 +124,13 @@ export const getInterestModelContract = address => {
   );
 };
 
+export const getFaucetContract = () => {
+  return new instance.eth.Contract(
+    JSON.parse(constants.CONTRACT_FAUCET_ABI),
+    constants.CONTRACT_FAUCET_ADDRESS
+  );
+};
+
 export const methods = {
   call,
   send

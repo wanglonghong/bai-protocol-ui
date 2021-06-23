@@ -82,4 +82,12 @@ const data = [
     to: '/vault',
   },
 ];
+
+if(process.env.REACT_APP_ENV === 'dev') {
+  data.push({
+    id: 'faucet',
+    label: 'Faucet',
+    to: '/faucet',
+  })
+}
 export default data;
