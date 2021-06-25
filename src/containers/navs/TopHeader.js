@@ -462,8 +462,8 @@ const TopHeader = ({ history, settings, setSetting, getGovernanceVenus }) => {
                               : ''
                           }
                         >
-                          <NavLink
-                            to={item.to}
+                          <a
+                            href={item.to}
                             className={
                               selectedMenu === item.id ||
                               selectedPath === item.to
@@ -478,7 +478,7 @@ const TopHeader = ({ history, settings, setSetting, getGovernanceVenus }) => {
                               <img src={item.icon} alt={item.label} />
                             )}
                             {item.label}
-                          </NavLink>
+                          </a>
                         </NavItem>
                       );
                     return (

@@ -3,21 +3,21 @@ export const topMenuItems = [
     id: 'home',
     icon: null,
     label: 'Home',
-    to: '',
+    to: '/',
     child: null,
   },
   {
     id: 'explorer',
     icon: null,
     label: 'Explorer',
-    to: '',
+    to: 'http://207.180.229.50/',
     child: null,
   },
   {
     id: 'website',
     icon: null,
     label: 'Website',
-    to: '',
+    to: 'https://bidaochain.org/',
     child: null,
   },
   {
@@ -25,6 +25,13 @@ export const topMenuItems = [
     icon: null,
     label: 'Token Info',
     to: '',
+    child: null,
+  },
+  {
+    id: 'faucet',
+    icon: null,
+    label: 'Get Tokens',
+    to: '/faucet',
     child: null,
   },
   // {
