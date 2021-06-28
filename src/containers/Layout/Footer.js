@@ -61,13 +61,6 @@ function Footer({ settings }) {
       <a href="https://t.me/BidaoProtocol" target="_blank" rel="noreferrer">
         Support
       </a>
-      <a
-        href="https://venus.io/Whitepaper.pdf"
-        target="_blank"
-        rel="noreferrer"
-      >
-        Whitepaper
-      </a>
     </FooterWrapper>
   );
 }
