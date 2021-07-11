@@ -171,7 +171,7 @@ function DelegationTypeModal({
             </div>
             <div className="description">
               This option allows you to delegate your votes to another Ethereum
-              address. You never send Venus, only your voting rights, and can
+              address. You never send Bidao, only your voting rights, and can
               undelegate at any time.
             </div>
           </div>
