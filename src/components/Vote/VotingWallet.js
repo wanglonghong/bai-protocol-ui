@@ -11,6 +11,7 @@ import DelegationTypeModal from 'components/Basic/DelegationTypeModal';
 import LoadingSpinner from 'components/Basic/LoadingSpinner';
 import { Card } from 'components/Basic/Card';
 import coinImg from 'assets/img/venus_32.png';
+import baiImg from 'assets/img/coins/vai.png';
 
 const VotingWalletWrapper = styled.div`
   width: 100%;
@@ -200,7 +201,7 @@ function VotingWallet({
                 </div>
                 <div className="mint-content-label">BAI Mint Earned</div>
                 <div className="flex align-center">
-                  <img src={coinImg} alt="coin" />
+                  <img src={baiImg} alt="coin" />
                   <p className="content-value">
                     {getBefore(format(vaiMint))}
                     <span>{getAfter(format(vaiMint))}</span>

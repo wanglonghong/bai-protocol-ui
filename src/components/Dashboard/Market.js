@@ -49,10 +49,8 @@ const TabContent = styled.div`
 `;
 
 const MintRepayVai = styled.div`
-  @media only screen and (max-width: 1300px) {
-    flex-direction: column;
-    justify-content: flex-start;
-  }
+  flex-direction: column;
+  justify-content: flex-start;
 `;
 
 const Market = ({ settings, setSetting }) => {
