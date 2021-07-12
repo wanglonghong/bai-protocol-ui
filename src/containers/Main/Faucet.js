@@ -219,9 +219,9 @@ function Faucet({ settings }) {
 
   const btcbMenu = (
     <Menu onClick={e => handleMenuClick(e, 'btcb')}>
-      <Menu.Item key="20">20 BTCBs</Menu.Item>
-      <Menu.Item key="50">50 BTCBs</Menu.Item>
-      <Menu.Item key="100">100 BTCBs</Menu.Item>
+      <Menu.Item key="2">2 BTCBs</Menu.Item>
+      <Menu.Item key="5">5 BTCBs</Menu.Item>
+      <Menu.Item key="10">10 BTCBs</Menu.Item>
     </Menu>
   );
 
@@ -308,7 +308,7 @@ function Faucet({ settings }) {
                       </Dropdown>
                     </ButtonWrapper>
                   </Column>
-                  <Column xs="6" sm="4">
+                  {/* <Column xs="6" sm="4">
                     <ButtonWrapper>
                       <Dropdown overlay={btcbMenu} placement="bottomCenter">
                         <Button className="fill-btn next-btn button">
@@ -316,7 +316,7 @@ function Faucet({ settings }) {
                         </Button>
                       </Dropdown>
                     </ButtonWrapper>
-                  </Column>
+                  </Column> */}
                   <Column xs="6" sm="4">
                     <ButtonWrapper>
                       <Dropdown overlay={ethMenu} placement="bottomCenter">
